@@ -3,24 +3,53 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <script src="./js/lib/d3-lite.js"></script>
-        <script src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/lib/pure-min.css">
+        <link rel="stylesheet" type="text/less" href="css/main.css">
+        <script src="css/lib/less-min.js"></script>
+        <script src="jspm_packages/system.js"></script>
+        <script src="js/config.js"></script>
         <title></title>
     </head>
     <body>
-        <div class="home z-100">
-            <h1>Hellow, wines! :]</h1>
+        <h1 class="w-center">Kind of RAW</h1>
+        
+        <div>
+          <section class="sec-data">
+            <div id="importForm"></div>
+          </section>
+        </div>  
+        <div> 
+          <section class="sec-table">
+            <h2>Clean the table</h2>            
+            <table class="pure-table ff-m w-100">
+                <thead id="dtHead"></thead>
+                <tbody id="dtBody"></tbody>
+            </table>        
+            <input type="button" id="inputChart" class="pure-button pure-u-1-3 mt-5" value="Create charts">   
         </div>
-        <div class="brands z-100">
-            <div class="che"></div>
-            <div class="esp"></div>
-            <div class="prt"></div>
-            <div class="ita"></div>
+
+        <div>
+          <section class="sec-chart">
+            <h2>Choose a chart</h2>            
+            <div id="chartList"></div>
+          </section>
+        </div>  
+        <div>
+          <section class="sec-tweak">
+            <h2>Edit your visualization</h2> 
+          </section>
+        </div>  
+        <div class="c-white cbg-grey1">
+          <section class="sec-code">
+            <h2>Get embeded code</h2>            
+          </section>
         </div>
-        <div class="products z-100">
-            <h2>Oh, looks cool!!! Here are our projects:</h2></div>
-        <div class="contact z-100">
-        </div>
+
+        <script>
+            // loads main.js
+        System.import('js/main').then(function(main){
+            main.init();
+        });
+        </script>
     </body>
 </html>
