@@ -22,5 +22,7 @@ export default function() {
             case "inputKey": importJsonFromS3(text); break;
             case "inputCSV": importCSV(text); break;
         }
+        
+        document.querySelector(".sec-table > div").classList.remove("d-n");
     }, false);
 }

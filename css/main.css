@@ -12,34 +12,39 @@
 body {
     font-family: sans-serif;
 }
-body > div:nth-child(even) {
+
+section:nth-child(even) {
     background-color: @c-grey8;
 }
-
-section {
+section > div {
     &:extend(.w-center);
-    padding: 15px 0 30px 0;
+    padding: 0 0 30px;
     overflow: hidden;
 }
 
 h2 {
-    font-size: 18px;
+    &:extend(.w-center);
+    font-size: 22px;
+    margin: 0;
+    padding: 30px 0;
 }
 
+[contentEditable=true] {
+    outline: none;
+}
 
 /* atomic-liked css*/
 .ff-s  { font-family: serif; }
 .ff-ss { font-family: sans-serif; }
 .ff-m  { font-family: monospace !important; }
+.fz-20 { font-size: 20px; }
+.fz-12 { font-size: 12px; }
+.fw-b  { font-weight: bold; }
 
 .c-white { color: white; }
 .cf-blue2 { fill: @c-blue2; }
 .cf-grey1 { fill: @c-grey2; }
-.cbg-grey1 { background-color: @c-grey1 !important; }
 
-.w-100 {
-    width: 100%;
-}
 .w-center {
     max-width: 1024px;
     margin-left: auto;
@@ -47,64 +52,115 @@ h2 {
     padding-left: 30px;
     padding-right: 30px;
 }
-.h-200 { height: 200px; }
-.h-34 { height: 34px; }
+.w-100 { width:  100%;  }
+.h-35p { height: 35vh; min-height: 200px; }
+.h-34  { height: 34px;  }
 
-.mt-5 { margin-top: 5px; }
+.mt-5  { margin-top: 5px; }
+.mb-15  { margin-bottom: 15px; }
+.pb-40 { padding-bottom: 40px; }
 
 .d-n { display: none; }
 .d-b { display: block; }
 .f-r { float: right; }
+.o-s { overflow: scroll; }
 .r-v { resize: vertical; }
 
+.ta-str { text-anchor: start; }
+.ta-end { text-anchor: end; }
+
+.b-1sg8 { border: 1px solid @c-grey8; }
 
 /* custom css */
+/* section form */
 .btn-import {
     width: ~"calc(100% / 3 - 5px)";
     margin-left: 5px;
 }
 
-svg {
-    border: 10px solid @c-grey6;
-    margin-right: -10px;
-    margin-bottom: -10px;
-    vertical-align: top;
-    box-sizing: border-box;
+/* section table */
+.sec-table {
+    .table-type {
+        color: green;
+        font-style: italic;
+        font-weight: normal;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    th {
+        min-width: 140px;
+    }
+    tbody tr:nth-child(even) {
+        background-color: @c-grey8;
+    }
 }
-svg:hover {
-    background-color: white;
-    cursor: pointer;
+/*section charts*/
+.sec-chart {
+    padding-bottom: 10px;
+
+    svg {
+        border: 10px solid @c-grey6;
+        margin-right: -10px;
+        margin-bottom: -10px;
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+    svg:hover {
+        background-color: white;
+        cursor: pointer;
+    }
+    svg * {
+        pointer-events: none;
+    }
 }
 
-.chart-bar rect {
-    fill: @c-blue2;
+/* section panel */
+.sec-panel {   
+    [contentEditable=true]:hover {
+        border-bottom: 1px dotted @c-grey2;
+    } 
+    .input-line {
+        width: 60px;        
+        display: inline-block;
+        border-bottom: 1px dotted @c-grey2;
+        line-height: 1.5em;
+        text-align: center;
+    }
 }
-.chart-bar text {
-    font: 11px sans-serif;
+.panel-basic { 
+    font-family: monospace; 
+    padding: 10px;
+    background-color: #f1f1f1;
+    line-height: 2em;
+}
+.panel-chart {
+    color: #808080;
+    font-size: 15px;
+    font-family: 'Guardian Text Sans Web', Arial, sans-serif;;
+    width: 620px; //max-width: 860px;
+    h3 {
+    color: #000;
+    font-size: 20px;
+    font-family: 'Guardian Egyptian Web', Georgia, serif;;
+    font-weight: bold;
+    border-bottom: 1px solid @c-grey7;    
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    }    
+    h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    }
+}
+.panel-footer {
+    color: @c-grey2;
+    font-family: 'Guardian Text Sans Web', Arial, sans-serif;;
+    font-size: 13px;
+    border-top: 2px solid @c-grey7;
+    padding-top: 5px;
 }
 
-.ta-str { text-anchor: start; }
-.ta-end { text-anchor: end; }
-
-.axis {
-    font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-
-.x.axis path {
-    display: none;
-}
-
-.table-type {
-    color: green;
-    font-style: italic;
-    font-weight: normal;
-    margin-left: 10px;
-    cursor: pointer;
+/* section code */
+.sec-code {
+    background-color: @c-grey1 !important;
 }

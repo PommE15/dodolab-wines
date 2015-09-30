@@ -24,7 +24,7 @@ export function importJsonFromS3(key) {
         var keys, type = [], list = [];
         keys = Object.keys(data[0]); 
         
-        // parse into array list 
+        // parse into lines 
         data.forEach(d => {
             var item = [];
             keys.forEach(k => {
@@ -35,6 +35,9 @@ export function importJsonFromS3(key) {
             }
         });
         
+        // parse into array list as data for charts
+        list = list[0].map((d2, i) => list.map(d1 => d1[i]));
+
         sectionTable({keys: keys, list: list});
     });
 }
@@ -47,16 +50,18 @@ export function importCSV(data) {
     // parse into lines
     data = data.split(/[\n|\r]/g);
 
-    // parse into array list
+    // parse into items
     data.forEach(d => {
         var item = d.split("\t");
-        if(item!==null) { 
+        if(item!==null) {
             list.push(item); 
         }
-        type.push(typeof(item));
     });
     keys = list[0];
     list = list.splice(1, list.length);
+    
+    // parse into array list as data for charts
+    list = list[0].map((d2, i) => list.map(d1 => d1[i]));
 
     sectionTable({keys: keys, list: list});
 }
