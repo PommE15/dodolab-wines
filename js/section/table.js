@@ -13,6 +13,10 @@ export default function(data) {
         //TODO: remap data for charts
         data.groups = data.list[0];
         data.list = data.list.filter((d, i) => i > 0);
+        data.count = {
+            color: data.list.length,
+            group: data.groups.length
+        };
         //console.log(data);
 
         sectionCharts(data);

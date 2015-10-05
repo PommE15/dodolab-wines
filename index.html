@@ -3,6 +3,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/lib/font-min.css">
         <link rel="stylesheet" type="text/css" href="css/lib/pure-min.css">
         <link rel="stylesheet" type="text/less" href="css/main.css">
         <script src="css/lib/less-min.js"></script>
@@ -12,38 +13,41 @@
     </head>
     <body>
         <h1 class="w-center">Kind of RAW</h1>
-        
-        <div>
-          <section class="sec-data">
-            <div id="importForm"></div>
-          </section>
-        </div>  
-        <div> 
-          <section class="sec-table">
-            <h2>Clean the table</h2>            
-            <table class="pure-table ff-m w-100">
-                <thead id="dtHead"></thead>
-                <tbody id="dtBody"></tbody>
-            </table>        
-            <input type="button" id="inputChart" class="pure-button pure-u-1-3 mt-5" value="Create charts">   
-        </div>
 
-        <div>
-          <section class="sec-chart">
-            <h2>Choose a chart</h2>            
-            <div id="chartList"></div>
-          </section>
-        </div>  
-        <div>
-          <section class="sec-tweak">
-            <h2>Edit your visualization</h2> 
-          </section>
-        </div>  
-        <div class="c-white cbg-grey1">
-          <section class="sec-code">
-            <h2>Get embeded code</h2>            
-          </section>
-        </div>
+        <section class="sec-form">
+            <h2>Import data</h2>
+            <div id="importForm"></div>
+        </section>
+
+        <section class="sec-table">  
+            <h2>Clean the table</h2> 
+            <div class="d-n"> 
+                <div class="o-s b-1sg8">
+                    <table class="pure-table ff-m w-100">
+                        <thead id="dtHead"></thead>
+                        <tbody id="dtBody"></tbody>
+                    </table>       
+                </div> 
+                <input type="button" id="inputChart" class="pure-button pure-u-1-3 mt-5" value="Create charts">   
+            </div>
+        </section>
+
+        <section class="sec-chart">
+            <h2>Select a chart</h2>            
+            <div id="chartList" class="d-n pb-40"></div>
+        </section>
+
+        <section class="sec-panel">
+            <h2>Edit this visualization</h2>
+            <div id="editPanel"></div> 
+        </section>
+
+        <section class="sec-code c-white">
+            <h2>Get your embeded code</h2>            
+            <div>
+                <code id="embedCode" class="fz-12"></code>
+            </div>
+        </section>
 
         <script>
             // loads main.js

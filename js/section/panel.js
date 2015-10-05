@@ -1,11 +1,31 @@
 import editPanelHTML from "html/editPanel.html!text";
 import {drawChart} from "js/component/createCharts";
 
+var color = d3.scale.ordinal()
+    .range([
+        "#4dc6dd", "#005789", 
+        "#ff9b0b", "#fcdd03", "#ea6911", "#808080", 
+        "#aad801"/*, "#bdbdbd", "#767676"*/ 
+    ]);
+
 export default function(el, data, cols) {
     // load edit panel
     var editPanel;
     editPanel = document.querySelector("#editPanel");
     editPanel.innerHTML = editPanelHTML;
+    
+    // load chart keys
+    var colorKeys = data.keys.slice(1, data.keys.length);
+    d3.select(".js-keys")
+    .selectAll("span")
+    .data(colorKeys).enter()
+    .append("span")
+    .style("color", (d, i) => color(i))
+    .style("border-right", (d, i) => i<(data.count.color-1) ? "2px solid #bdbdbd":"none")
+    .style("margin-right", "5px")
+    .style("padding-right", "5px")
+    .attr("contentEditable", true)
+    .text(d => d);
     
     // load svg chart to the panel
     var width = 620,

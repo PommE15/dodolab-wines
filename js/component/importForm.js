@@ -21,13 +21,13 @@ export function importJsonFromS3(key) {
             return;
         } 
         
-        var keys, type = [], list = [];
-        keys = Object.keys(data[0]); 
+        var head, type = [], list = [];
+        head = Object.keys(data[0]); 
         
         // parse into lines 
         data.forEach(d => {
             var item = [];
-            keys.forEach(k => {
+            head.forEach(k => {
                 item.push(d[k]);
             }); 
             if(item!==null) { 
@@ -38,13 +38,13 @@ export function importJsonFromS3(key) {
         // parse into array list as data for charts
         list = list[0].map((d2, i) => list.map(d1 => d1[i]));
 
-        sectionTable({keys: keys, list: list});
+        //sectionTable({head: head, list: list});
     });
 }
 
 export function importCSV(data) {
     if (data.length < 10) return;
-    var keys, type = [], list = [];
+    var head, type = [], list = [];
 
     // TODO: how to add meta
     // parse into lines
@@ -57,11 +57,12 @@ export function importCSV(data) {
             list.push(item); 
         }
     });
-    keys = list[0];
-    list = list.splice(1, list.length);
+    //head = list[0];
+    //list = list.splice(1, list.length);
     
     // parse into array list as data for charts
-    list = list[0].map((d2, i) => list.map(d1 => d1[i]));
-
-    sectionTable({keys: keys, list: list});
+    //var cols = list[0].map((d2, i) => list.map(d1 => d1[i]));
+    //console.log(cols);
+    //console.log(list);
+    sectionTable({rows: list});
 }

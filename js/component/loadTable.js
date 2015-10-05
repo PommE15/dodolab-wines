@@ -1,10 +1,15 @@
 function getDataType(data) {
-    var type = [];
-    data.list.forEach(d =>
-        type.push(typeof(d[0]))
-    );
-    return type;
+    return data.map(d => typeof(d[0]));
 }
+
+function getDataRows(data) {
+    return data.map(d => true);
+}
+
+function getDataCols(data) {
+    return data.map(d => true);
+}
+
 function parseNumber(data) {
     return data.map(d => {
         var isNum = d.filter(f => isNaN(f)).length === 0;
@@ -14,7 +19,18 @@ function parseNumber(data) {
 
 export default function(data) {
     /* data */
-    data.list = parseNumber(data.list);
+    // head
+    data.keys = data.rows.splice(0, 1)[0];
+    // body
+    data.cols = data.rows[0].map((d2, i) => data.rows.map(d1 => d1[i]));
+    data.cols = parseNumber(data.cols);
+
+    data.type = getDataType(data.cols);
+    data.toggle = {
+        rows: getDataRows(data.rows),
+        cols: getDataCols(data.cols)
+    };
+    console.log(data);
 
     /* view */
     // load data to table
@@ -26,18 +42,17 @@ export default function(data) {
     dtBody.selectAll("tr").remove();
 
     // add table body
-    data.list[0].forEach((d, iRow)=> {
+    data.rows.forEach((r, iRow)=> {
         dtBody.append("tr")
         .selectAll("td")
-        .data(data.list).enter()
+        .data(data.cols).enter()
         .append("td")
-        .attr("class", (d, iCol) => "b-" + iCol)
+        .attr("class", (c, iCol) => "b-" + iCol)
         .attr("contentEditable", true)
         .text(d => d[iRow]);
     });
 
     // add table head
-    data.type = getDataType(data);
     var th = dtHead.append("tr")
     .selectAll("th")
     .data(data.keys).enter()
@@ -48,19 +63,20 @@ export default function(data) {
     .attr("contentEditable", true)
     .text(d => d); 
 
+    // add table type to cols
     th.append("span")
     .attr("id", (d, i) => "t-" + i)
     .attr("class", "table-type")
-    .text((d, i) => data.type[i])
+    .text((d, i) => (i!==0) ? data.type[i]:"")
     .on("click", (d, iCol) => {
-        //update list
+        //update body
         var txt;
         d3.selectAll(".b-" + iCol)
-        .data(data.list[iCol])
+        .data(data.cols[iCol])
         .text((t, iRow) => {
             var num = str2num(t);
             txt = !isNaN(num) ? num : t;
-            data.list[iCol][iRow] = txt;
+            data.cols[iCol][iRow] = txt;
             return txt;
         });
         //update type
@@ -69,7 +85,10 @@ export default function(data) {
         data.type[iCol] = typeList;
     });
     
-    return data;
+    return { 
+        keys: data.keys,
+        list: data.cols
+    };
 }
 
 function str2num(str) {

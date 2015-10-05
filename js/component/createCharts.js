@@ -54,7 +54,7 @@ export function barHorizontal(chartEl, data, opt, groups) {
     .attr("height", h - 1)
     .attr("width", d => x(d));
     
-    //if (opt.update) { barHText(chart, groups, x, h); }
+    //if (opt.update) { barHTennnxt(chart, groups, x, h); }
 }
 
 export function barVertical(chartEl, data, opt) {
@@ -173,7 +173,7 @@ export function barHorizontalGroupStack(chartEl, data, opt, groups) {
     .attr("width", d => x(d.width))
     .attr("height", h - 1);
     
-    //if (opt.update) { barHText(chart, groups, x, h, true); }
+    if (opt.update) { barHTextGroup(chart, x, h, groups); } 
 }
 
 export function barHorizontalGroupStack100(chartEl, data, opt, groups) {
@@ -205,7 +205,7 @@ export function barHorizontalGroupStack100(chartEl, data, opt, groups) {
     .attr("width", d => x(d.width))
     .attr("height", h - 1);
     
-    //if (opt.update) { barHText(chart, groups, x, h, true); }
+    if (opt.update) { barHTextGroup(chart, x, h, groups); } 
 }
 
 export function barHorizontalStack100(chartEl, data, opt, groups) {
@@ -311,10 +311,22 @@ function barHTextLabel(chart, x, h) {
     chart.selectAll("text")
     .data(d => d)
     .enter().append("text")
+    .attr("x", d => {
+        var posX = x(d);
+        return (posX > 600 ? 100 : Math.round((posX+h/2)/0.62)/10) + "%";
+    })
+    .attr("y", (d, i) => {
+        var posX = x(d),
+            idx = posX > 600 ? i : i+1;
+        return Math.round((idx)*h) - 2;
+    })
     .style("fill", (d, i) => color(i))
-    .attr("x", d => Math.round(x(d) + h/2))
-    .attr("y", (d, i) => Math.round((i+1)*h) - 2)
-    .text(d => d.toLocaleString()); //TODO: remove temp toLocale*
+    .style("text-anchor", d => {
+        var posX = x(d);
+        return (posX > 600) ? "end" : "start";
+    })
+    .text(d => d.toLocaleString()); 
+    //TODO: remove temp toLocale*
 }
 
 function barHTextGroup(chart, x, h, groups) {  
