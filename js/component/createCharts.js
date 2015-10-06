@@ -5,11 +5,6 @@ var color = d3.scale.ordinal()
         "#aad801"/*, "#bdbdbd", "#767676"*/ 
     ]);
 
-function getData(data) {
-    //data = data.filter((d, i) => cols.indexOf(i) !== -1);
-    return data[0].map((d3, i) => data.map(d1 => d1[i]));
-}
-
 function addChart(el, id, opt) {
     var chart = el
         .append("svg")
@@ -35,11 +30,8 @@ function addChartGroups(el, id, data, opt) {
 
 
 export function barHorizontal(chartEl, data, opt, groups) {
-    // data
-    //data = data[0];
-
-    // view
-    var h = (opt.height - opt.space + 1) / data.length,
+    
+    var h = (opt.height - opt.space) / (data.length*2 - 1),
         x = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([0, opt.width - opt.space]);
@@ -49,20 +41,15 @@ export function barHorizontal(chartEl, data, opt, groups) {
     chart.selectAll("rect")
     .data(data)
     .enter().append("rect")
-    .attr("fill", color(0))
-    .attr("y", (d, i) => i * h)
-    .attr("height", h - 1)
+    .attr("fill", (d, i) => color(i))
+    .attr("y", (d, i) => i * h * 2)
+    .attr("height", h)
     .attr("width", d => x(d));
-    
-    //if (opt.update) { barHTennnxt(chart, groups, x, h); }
 }
 
 export function barVertical(chartEl, data, opt) {
-    // data
-    //data = data[0];
-
-    // view
-    var w = (opt.width - opt.space) / data.length,
+    
+    var w = (opt.width - opt.space + 5) / (data.length),
         y = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([opt.height - opt.space, 0]);
@@ -71,98 +58,80 @@ export function barVertical(chartEl, data, opt) {
 
     chart.selectAll(".rect")
     .data(data)
-    // enter
     .enter().append("rect")
     .attr("fill", (d, i) => color(i))
     .attr("x", (d, i) => i * w)
-    .attr("width", w - 1)
+    .attr("width", w - 5)
     .attr("y", d => y(d))
-    .attr("height", d => opt.height - y(d) - opt.space)
-    // update
-    .attr("x", (d, i) => i * w)
-    .attr("width", w - 1)
-    .attr("y", d => y(d))
-    .attr("height", d => opt.height - y(d) - opt.space)
-    .on("click", d => console.log("change color of", d));
+    .attr("height", d => opt.height - y(d) - opt.space);
 }
 
-export function barHorizontalGroup(chartEl, data, opt, groups) {
-    // data
-    data = getData(data);
+export function barHorizontalGroup(chartEl, data, opt) {
     
-    // view
-    var nGroups = data.length,
-        nColors = data[0].length + 1.25;
-    
-    var h = (opt.height - opt.space) / (nGroups*nColors),
+    var nColor = data.count.color + 1,
+        nTotal = data.count.group * nColor - 1; 
+
+    var h = (opt.height - opt.space) / nTotal,
         x = d3.scale.linear()
-    .domain([0, d3.max(data.map(arr => d3.max(arr)))])
+    .domain([0, d3.max(data.glist.map(arr => d3.max(arr)))])
     .range([0, opt.width - opt.space]);
     
-    var chart = addChartGroups(chartEl, "barHG", data, opt)
-    .attr("transform", (d, i) => "translate(0," + Math.round(i*nColors*h) + ")");
+    var chart = addChartGroups(chartEl, "barHG", data.glist, opt)
+    .attr("transform", (d, i) => "translate(0," + Math.round(i*nColor*h) + ")");
     
     chart.selectAll("rect")
     .data(d => d)
     .enter().append("rect")
     .style("fill", (d, i) => color(i))
     .attr("y", (d, i) => Math.round(i * h))
-    .attr("height", Math.round(h - 2))
+    .attr("height", h - 1)
     .attr("width", d => Math.round(x(d)));
     
     if (opt.update) { 
         barHTextLabel(chart, x, h); 
-        barHTextGroup(chart, x, h, groups); 
+        barHTextGroup(chart, x, h, data.group); 
     }
 }
 
 export function barVerticalGroup(chartEl, data, opt) {
-    // data
-    data = getData(data);
     
-    // view
-    var nGroups = data.length,
-        nColors = data[0].length + 1;
+    var nColor = data.count.color + 1,
+        nTotal = data.count.group * nColor - 1;
 
-    var w = (opt.width - opt.space) / (nGroups*nColors - 1),
-
+    var w = (opt.width - opt.space) / nTotal,
         y = d3.scale.linear()
-    .domain([0, d3.max(data.map(arr => d3.max(arr)))])
+    .domain([0, d3.max(data.glist.map(arr => d3.max(arr)))])
     .range([opt.height - opt.space, 0]);
     
-    var chart = addChartGroups(chartEl, "barVG", data, opt)
-    .attr("transform", (d, i) => "translate(" + i*nColors*w+ ",0)");
+    var chart = addChartGroups(chartEl, "barVG", data.glist, opt)
+    .attr("transform", (d, i) => "translate(" + i*nColor*w+ ",0)");
     
     chart.selectAll("rect")
     .data(d => d)
     .enter().append("rect")
     .style("fill", (d, i) => color(i))
     .attr("x", (d, i) => i * w)
-    .attr("width", w)
+    .attr("width", w - 1)
     .attr("y", d => y(d))
     .attr("height", d => opt.height - y(d) - opt.space);
 }
 
-export function barHorizontalGroupStack(chartEl, data, opt, groups) {
-    // data
-    data = getData(data);
-        
-    // view
-    var nGroups = data.length * 2;
-    
-    var h = (opt.height - opt.space + 1) / nGroups,
-        x = d3.scale.linear()
-    .domain([0, d3.max(data.map(arr => d3.sum(arr)))])
-    .range([0, opt.width - opt.space]);
-    
+export function barHorizontalGroupStack(chartEl, data, opt) {
     // data remap for stack
-    data = data.map(f => {
+    var list = data.glist.map(f => {
         return f.map((d, i) => {
             return {x: d3.sum(f.slice(0, i)), width: d};
         });
     });
+    
+    var nTotal = data.count.group * 2 - 1;
+    
+    var h = (opt.height - opt.space) / nTotal,
+        x = d3.scale.linear()
+    .domain([0, d3.max(data.glist.map(arr => d3.sum(arr)))])
+    .range([0, opt.width - opt.space]);
 
-    var chart = addChartGroups(chartEl, "barHGS", data, opt)
+    var chart = addChartGroups(chartEl, "barHGS", list, opt)
     .attr("transform", (d, i) => "translate(0," + i*h*2 + ")");
     
     chart.selectAll("rect")
@@ -171,16 +140,41 @@ export function barHorizontalGroupStack(chartEl, data, opt, groups) {
     .style("fill", (d, i) => color(i))
     .attr("x", d => x(d.x))
     .attr("width", d => x(d.width))
-    .attr("height", h - 1);
+    .attr("height", h);
     
-    if (opt.update) { barHTextGroup(chart, x, h, groups); } 
+    if (opt.update) { barHTextGroup(chart, x, h, data.group); } 
 }
 
-export function barHorizontalGroupStack100(chartEl, data, opt, groups) {
-    // data
-    data = getData(data);
+export function barVerticalGroupStack(chartEl, data, opt) {
+    // data remap for stack
+    var list = data.glist.map(f => {
+        return f.map((d, i) => {
+            return {y: d3.sum(f.slice(0, i+1)), height: d};
+        });
+    });
+
+    var nTotal = data.count.group;
+
+    var w = (opt.width - opt.space + 5) / nTotal,
+        y = d3.scale.linear()
+    .domain([0, d3.max(data.glist.map(arr => d3.sum(arr)))])
+    .range([opt.height - opt.space, 0]);
+
+    var chart = addChartGroups(chartEl, "barVGS", list, opt)
+    .attr("transform", (d, i) => "translate(" + i*w + ",0)");
+    
+    chart.selectAll("rect")
+    .data(d => d)
+    .enter().append("rect")
+    .style("fill", (d, i) => color(i))
+    .attr("width", w - 5)
+    .attr("y", d => y(d.y))
+    .attr("height", d => opt.height - y(d.height) - opt.space);
+}
+
+export function barHorizontalGroupStack100(chartEl, data, opt) {
     // data remap for stack 100%
-    data = data.map(f => {
+    var list = data.glist.map(f => {
         var sum = d3.sum(f);
         return f.map((d, i) => {
             var x = d3.sum(f.slice(0, i));
@@ -189,12 +183,14 @@ export function barHorizontalGroupStack100(chartEl, data, opt, groups) {
     });
          
     // view
-    var h = (opt.height - opt.space) / (data.length*2),
+    var nTotal = data.count.group * 2 - 1;
+    
+    var h = (opt.height - opt.space) / nTotal,
         x = d3.scale.linear()
     .domain([0, 100])
     .range([0, opt.width - opt.space]);
     
-    var chart = addChartGroups(chartEl, "barHGS1", data, opt)
+    var chart = addChartGroups(chartEl, "barHGS1", list, opt)
     .attr("transform", (d, i) => "translate(0," + i*h*2 + ")");
     
     chart.selectAll("rect")
@@ -203,9 +199,9 @@ export function barHorizontalGroupStack100(chartEl, data, opt, groups) {
     .style("fill", (d, i) => color(i))
     .attr("x", d => x(d.x))
     .attr("width", d => x(d.width))
-    .attr("height", h - 1);
+    .attr("height", h);
     
-    if (opt.update) { barHTextGroup(chart, x, h, groups); } 
+    if (opt.update) { barHTextGroup(chart, x, h, data.group); } 
 }
 
 export function barHorizontalStack100(chartEl, data, opt, groups) {
@@ -260,10 +256,7 @@ export function pieChart(chartEl, data, opt) {
 }
 
 export function lineChart(chartEl, data, opt) {
-    // data
-    //data = data.filter((d, i) => cols.indexOf(i) !== -1);
     
-    // view
     var w = (opt.width - opt.margin) / data[0].length,
         y = d3.scale.linear()
     .domain([0, d3.max(data.map(arr => d3.max(arr)))])
@@ -273,8 +266,8 @@ export function lineChart(chartEl, data, opt) {
     .x((d, i) => Math.round(i*w*10)/10)
     .y(d => Math.round(y(d)*10)/10);
         
-    var cn = (data.length===1) ? "line" : "lines";
-    var chart = addChart(chartEl, cn, opt);
+    //var cn = (data.length===1) ? "line" : "lines";
+    var chart = addChart(chartEl, "lines", opt);
     
     chart.selectAll("path")
     .data(data)
@@ -287,22 +280,20 @@ export function lineChart(chartEl, data, opt) {
 
 export function drawChart(chart, data, opt, type) {
     // data
-    var groups = data.groups,
-        colors = data.keys;
-    data = data.list;
-
+    
     // view
     switch(type) {
-        case "line":    lineChart(chart, [data[0]], opt); break; 
-        case "barH":    barHorizontal(chart, data[0], opt, groups); break;
-        case "barV":    barVertical(chart, data[0], opt); break;
-        case "barHS1":  barHorizontalStack100(chart, data[0], opt); break;
-        case "pie":     pieChart(chart, data[0], opt); break;
-        case "lines":   lineChart(chart, data, opt); break; 
-        case "barHG":   barHorizontalGroup(chart, data, opt, groups); break;
+        //case "line":    lineChart(chart, [data[0]], opt); break; 
+        case "barH":    barHorizontal(chart, data.clist[0], opt); break;
+        case "barV":    barVertical(chart, data.clist[0], opt); break;
+        case "barHS1":  barHorizontalStack100(chart, data.clist[0], opt); break;
+        case "pie":     pieChart(chart, data.clist[0], opt); break;
+        case "lines":   lineChart(chart, data.clist, opt); break; 
+        case "barHG":   barHorizontalGroup(chart, data, opt); break;
         case "barVG":   barVerticalGroup(chart, data, opt); break;
-        case "barHGS":  barHorizontalGroupStack(chart, data, opt, groups); break;
-        case "barHGS1": barHorizontalGroupStack100(chart, data, opt, groups); break;
+        case "barHGS":  barHorizontalGroupStack(chart, data, opt); break;
+        case "barVGS":  barVerticalGroupStack(chart, data, opt); break;
+        case "barHGS1": barHorizontalGroupStack100(chart, data, opt); break;
         default: console.log("need a new chart!?");
     }
 }

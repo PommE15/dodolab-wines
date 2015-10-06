@@ -1,9 +1,9 @@
 /* section 2. charts */
-import { barHorizontal, barVertical, barHorizontalGroup, barVerticalGroup, barHorizontalStack100, barHorizontalGroupStack, barHorizontalGroupStack100, pieChart, lineChart } from "js/component/createCharts";
+import { barHorizontal, barVertical, barHorizontalGroup, barVerticalGroup, barHorizontalStack100, barHorizontalGroupStack, barVerticalGroupStack, barHorizontalGroupStack100, pieChart, lineChart } from "js/component/createCharts";
 import sectionPanel from "js/section/panel"; 
 
 export default function(data) {
-
+    
     var chartId = "#chartList",
         chartList = document.querySelector(chartId),
         chartEl = d3.select(chartId);
@@ -22,24 +22,39 @@ export default function(data) {
         width : width,
         height: Math.round(width * 2 * 10 / 3)/10,
         margin: 10, //border: 10,
-        space : 40,  //margin*2 + border*2
+        space : 40  //margin*2 + border*2,
     };
     
-    lineChart(chartEl, [data.list[0]], opt);
-    lineChart(chartEl, data.list, opt);
+    console.log("data chart:");
+    console.log(data);
+    console.log("======");
     
-    barHorizontal(chartEl, data.list[0], opt);
-    barVertical(chartEl, data.list[0], opt);
-    //barHorizontalGroup(chartEl, data.list, [4]);
-    //barVerticalGroup(chartEl, data.list, [5]);
-    
-    barHorizontalGroup(chartEl, data.list, opt);
-    barVerticalGroup(chartEl, data.list, opt);
-    barHorizontalGroupStack(chartEl, data.list, opt);
-    barHorizontalGroupStack100(chartEl, data.list, opt);
-    
-    barHorizontalStack100(chartEl, data.list[0], opt);
-    pieChart(chartEl, data.list[0], opt);
+    if (data.group.length === 1) {
+        //TODO: fix demo charts
+        barHorizontalGroup(chartEl, data, opt);
+        barVerticalGroup(chartEl, data, opt);
+        barHorizontal(chartEl, data.clist, opt);
+        barVertical(chartEl, data.clist, opt);
+        //barHorizontalGroupStack(chartEl, data, opt);
+    }
+    else if (data.color.length === 1) {
+        lineChart(chartEl, data.clist, opt);
+        barHorizontalGroup(chartEl, data, opt);
+        barVerticalGroup(chartEl, data, opt);
+        barHorizontal(chartEl, data.clist[0], opt);
+        barVertical(chartEl, data.clist[0], opt);
+        barHorizontalStack100(chartEl, data.clist[0], opt);
+        pieChart(chartEl, data.clist[0], opt);
+    } else {
+        lineChart(chartEl, data.clist, opt);
+        barHorizontalGroup(chartEl, data, opt);
+        barVerticalGroup(chartEl, data, opt);
+        barHorizontalGroupStack100(chartEl, data, opt);
+        barHorizontalGroupStack(chartEl, data, opt);
+        barVerticalGroupStack(chartEl, data, opt);
+        barHorizontalStack100(chartEl, data.clist[0], opt);
+        pieChart(chartEl, data.clist[0], opt);
+    }
     
     // load panel 
     chartList.addEventListener("click", function(e) {

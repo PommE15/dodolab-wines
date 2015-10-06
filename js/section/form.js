@@ -1,4 +1,4 @@
-/* section 1. import*/
+/* section 1. import */
 import importFormHTML from "html/importForm.html!text";
 import { importJsonFromS3, importCSV } from "js/component/importForm";
 

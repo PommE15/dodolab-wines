@@ -36,7 +36,7 @@ export function importJsonFromS3(key) {
         });
         
         // parse into array list as data for charts
-        list = list[0].map((d2, i) => list.map(d1 => d1[i]));
+        //list = list[0].map((d2, i) => list.map(d1 => d1[i]));
 
         //sectionTable({head: head, list: list});
     });
@@ -57,12 +57,6 @@ export function importCSV(data) {
             list.push(item); 
         }
     });
-    //head = list[0];
-    //list = list.splice(1, list.length);
     
-    // parse into array list as data for charts
-    //var cols = list[0].map((d2, i) => list.map(d1 => d1[i]));
-    //console.log(cols);
-    //console.log(list);
     sectionTable({rows: list});
 }

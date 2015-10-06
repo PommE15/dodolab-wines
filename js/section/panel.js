@@ -15,7 +15,7 @@ export default function(el, data, cols) {
     editPanel.innerHTML = editPanelHTML;
     
     // load chart keys
-    var colorKeys = data.keys.slice(1, data.keys.length);
+    var colorKeys = data.color;//data.keys.slice(1, data.keys.length);
     d3.select(".js-keys")
     .selectAll("span")
     .data(colorKeys).enter()
@@ -29,7 +29,7 @@ export default function(el, data, cols) {
     
     // load svg chart to the panel
     var width = 620,
-        units = (data.list.length + 1.25)*data.groups.length,
+        units = (data.clist.length + 1.25)*data.group.length,
         height = Math.round(14*units);
         //height = Math.round(width*2/3);
     
@@ -40,7 +40,7 @@ export default function(el, data, cols) {
         margin: 0,
         space: 0,
         update: true
-    },  el.id);
+        }, el.id);
  
     chart.select("g")
     .attr("transform", "translate(0, 15)");

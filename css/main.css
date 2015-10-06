@@ -57,19 +57,20 @@ h2 {
 .h-34  { height: 34px;  }
 
 .mt-5  { margin-top: 5px; }
-.mb-15  { margin-bottom: 15px; }
+.mb-15 { margin-bottom: 15px; }
 .pb-40 { padding-bottom: 40px; }
 
 .d-n { display: none; }
 .d-b { display: block; }
 .f-r { float: right; }
-.o-s { overflow: scroll; }
 .r-v { resize: vertical; }
+.o-s { overflow: scroll; }
 
 .ta-str { text-anchor: start; }
 .ta-end { text-anchor: end; }
 
 .b-1sg8 { border: 1px solid @c-grey8; }
+
 
 /* custom css */
 /* section form */
@@ -93,6 +94,29 @@ h2 {
     tbody tr:nth-child(even) {
         background-color: @c-grey8;
     }
+
+    // hide elements 
+    input.col-0,
+    .col-0 span {
+        display: none;
+    }
+}
+
+.btn-toggle div {
+    margin-bottom: 15px;
+}
+.btn-toggle input {
+    font: 12px monospace !important;
+    font-weight: bold !important;
+    width: ~"calc((100% - 60px) / 6)";
+    padding: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    border-radius: 15px;
+}
+.btn-toggle-off {
+    opacity: 0.4;
+    text-decoration: line-through;
 }
 /*section charts*/
 .sec-chart {
