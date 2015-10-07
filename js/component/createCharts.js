@@ -1,8 +1,8 @@
 var color = d3.scale.ordinal()
     .range([
-        "#4dc6dd", "#005789", 
-        "#ff9b0b", "#fcdd03", "#ea6911", "#808080", 
-        "#aad801"/*, "#bdbdbd", "#767676"*/ 
+        "#4dc6dd", "#005789", "#bdbdbd", 
+        "#ff9b0b", "#fcdd03", "#ea6911", 
+        "#aad801", "#808080", "#dfdfdf" 
     ]);
 
 function addChart(el, id, opt) {
@@ -29,8 +29,7 @@ function addChartGroups(el, id, data, opt) {
 }
 
 
-export function barHorizontal(chartEl, data, opt, groups) {
-    
+export function barHorizontal(chartEl, data, opt) {
     var h = (opt.height - opt.space) / (data.length*2 - 1),
         x = d3.scale.linear()
     .domain([0, d3.max(data)])
@@ -48,8 +47,7 @@ export function barHorizontal(chartEl, data, opt, groups) {
 }
 
 export function barVertical(chartEl, data, opt) {
-    
-    var w = (opt.width - opt.space + 5) / (data.length),
+    var w = (opt.width - opt.space + 5) / data.length,
         y = d3.scale.linear()
     .domain([0, d3.max(data)])
     .range([opt.height - opt.space, 0]);
@@ -204,7 +202,7 @@ export function barHorizontalGroupStack100(chartEl, data, opt) {
     if (opt.update) { barHTextGroup(chart, x, h, data.group); } 
 }
 
-export function barHorizontalStack100(chartEl, data, opt, groups) {
+export function barHorizontalStack100(chartEl, data, opt) {
     // data
     // data remap for stacked 100%
     var sum = d3.sum(data);
@@ -232,11 +230,7 @@ export function barHorizontalStack100(chartEl, data, opt, groups) {
 }
 
 export function pieChart(chartEl, data, opt) {
-    // data
-    data = data
-    .filter((d, i) => i<7); //TODO: remove after
     
-    // view
     var radius = Math.min(opt.width, opt.height) / 2;
     
     var pie = d3.layout.pie().sort(null),
@@ -255,6 +249,44 @@ export function pieChart(chartEl, data, opt) {
     .attr("d", arc);
 }
 
+export function treeMap(chartEl, data, opt) {
+    // data remap for treemap
+    var root = [];
+    if (data.count.color === 1) {
+        root = [{
+            children: data.glist.map((d, i) => {
+                return {"color": color(i), "size": d};
+        })}];
+    } else {
+        root = [{
+            children: data.clist.map((c, i) => {
+                return {
+                    children: c.map(d => {
+                        return {"color": color(i), "size": d};
+        })};})}];
+    }
+    // view
+    var treemap = d3.layout.treemap()
+    .size([opt.width - opt.space + 2, opt.height - opt.space + 2])
+    .sticky(true)
+    .value(d => d.size);
+
+    var chart = addChart(chartEl, "pie", opt)
+    .data(root)
+    .selectAll("g") 
+    .data(treemap.nodes)
+    .enter().append("g")
+    .attr("transform", d => "translate(" + d.x + "," + d.y + ")");
+
+    chart
+    .append("rect")
+    .style("fill", d => d.color)
+    .style("stroke", "white")
+    .style("stroke-width", 1)
+    .attr("width", d => d.dx)
+    .attr("height", d => d.dy);
+}
+
 export function lineChart(chartEl, data, opt) {
     
     var w = (opt.width - opt.margin) / data[0].length,
@@ -266,8 +298,7 @@ export function lineChart(chartEl, data, opt) {
     .x((d, i) => Math.round(i*w*10)/10)
     .y(d => Math.round(y(d)*10)/10);
         
-    //var cn = (data.length===1) ? "line" : "lines";
-    var chart = addChart(chartEl, "lines", opt);
+    var chart = addChart(chartEl, "line", opt);
     
     chart.selectAll("path")
     .data(data)
@@ -278,17 +309,35 @@ export function lineChart(chartEl, data, opt) {
     .attr("d", line);
 }
 
-export function drawChart(chart, data, opt, type) {
-    // data
+export function dotsChart(chartEl, data, opt) {
     
-    // view
+    var nGroup = data.count.group;
+
+    var w = (opt.width - opt.margin) / nGroup,
+        y = d3.scale.linear()
+    .domain([0, d3.max(data.clist.map(arr => d3.max(arr)))])
+    .range([opt.height - opt.space, 0]);
+    
+    var chart = addChartGroups(chartEl, "dots", data.clist, opt)
+    .attr("fill", (d, i) => color(i));
+    
+    chart.selectAll("circle")
+    .data(d => d)
+    .enter().append("circle")
+    .attr("cx", (d, i) => w*i)
+    .attr("cy", d => y(d))
+    .attr("r", 3);
+}
+
+export function drawChart(chart, data, opt, type) {
+    
     switch(type) {
-        //case "line":    lineChart(chart, [data[0]], opt); break; 
         case "barH":    barHorizontal(chart, data.clist[0], opt); break;
         case "barV":    barVertical(chart, data.clist[0], opt); break;
         case "barHS1":  barHorizontalStack100(chart, data.clist[0], opt); break;
         case "pie":     pieChart(chart, data.clist[0], opt); break;
-        case "lines":   lineChart(chart, data.clist, opt); break; 
+        case "line":    lineChart(chart, data.clist, opt); break; 
+        case "dots":    dotsChart(chart, data, opt); break; 
         case "barHG":   barHorizontalGroup(chart, data, opt); break;
         case "barVG":   barVerticalGroup(chart, data, opt); break;
         case "barHGS":  barHorizontalGroupStack(chart, data, opt); break;

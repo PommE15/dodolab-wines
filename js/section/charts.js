@@ -1,5 +1,5 @@
 /* section 2. charts */
-import { barHorizontal, barVertical, barHorizontalGroup, barVerticalGroup, barHorizontalStack100, barHorizontalGroupStack, barVerticalGroupStack, barHorizontalGroupStack100, pieChart, lineChart } from "js/component/createCharts";
+import { barHorizontal, barVertical, barHorizontalGroup, barVerticalGroup, barHorizontalStack100, barHorizontalGroupStack, barVerticalGroupStack, barHorizontalGroupStack100, pieChart, lineChart, dotsChart, treeMap } from "js/component/createCharts";
 import sectionPanel from "js/section/panel"; 
 
 export default function(data) {
@@ -31,11 +31,11 @@ export default function(data) {
     
     if (data.group.length === 1) {
         //TODO: fix demo charts
-        barHorizontalGroup(chartEl, data, opt);
-        barVerticalGroup(chartEl, data, opt);
-        barHorizontal(chartEl, data.clist, opt);
-        barVertical(chartEl, data.clist, opt);
-        //barHorizontalGroupStack(chartEl, data, opt);
+        var dataTweak = data.clist.map(d=>d[0]);
+        barHorizontal(chartEl, dataTweak, opt);
+        barVertical(chartEl, dataTweak, opt);
+        barHorizontalStack100(chartEl, dataTweak, opt);
+        pieChart(chartEl, dataTweak, opt);
     }
     else if (data.color.length === 1) {
         lineChart(chartEl, data.clist, opt);
@@ -45,15 +45,16 @@ export default function(data) {
         barVertical(chartEl, data.clist[0], opt);
         barHorizontalStack100(chartEl, data.clist[0], opt);
         pieChart(chartEl, data.clist[0], opt);
+        treeMap(chartEl, data, opt);
     } else {
         lineChart(chartEl, data.clist, opt);
+        dotsChart(chartEl, data, opt);
         barHorizontalGroup(chartEl, data, opt);
         barVerticalGroup(chartEl, data, opt);
-        barHorizontalGroupStack100(chartEl, data, opt);
         barHorizontalGroupStack(chartEl, data, opt);
         barVerticalGroupStack(chartEl, data, opt);
-        barHorizontalStack100(chartEl, data.clist[0], opt);
-        pieChart(chartEl, data.clist[0], opt);
+        barHorizontalGroupStack100(chartEl, data, opt);
+        treeMap(chartEl, data, opt);
     }
     
     // load panel 
