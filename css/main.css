@@ -183,6 +183,19 @@ h2 {
     border-top: 2px solid @c-grey7;
     padding-top: 5px;
 }
+.palette { 
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    padding-left: 15px;    
+    li {
+    width: 38px;
+    height: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+}}
 
 /* section code */
 .sec-code {
