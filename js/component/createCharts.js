@@ -54,7 +54,7 @@ export function barHorizontal(chartEl, data, opt) {
     chart.selectAll("rect")
     .data(data.clist[0])
     .enter().append("rect")
-    .attr("class", (d,i) => "g"+i)
+    .attr("class", (d,i) => "c"+i)
     .attr("fill", (d, i) => color(i))
     .attr("y", (d, i) => i * h)
     .attr("height", hRect)
@@ -75,7 +75,7 @@ export function barVertical(chartEl, data, opt) {
     chart.selectAll(".rect")
     .data(data.clist[0])
     .enter().append("rect")
-    .attr("class", (d,i) => "g"+i)
+    .attr("class", (d,i) => "c"+i)
     .attr("fill", (d, i) => color(i))
     .attr("x", (d, i) => i * w)
     .attr("width", w - 5)
@@ -112,8 +112,10 @@ export function barHorizontalGroup(chartEl, data, opt) {
     chart.selectAll("rect")
     .data(d => d)
     .enter().append("rect")
-    .attr("class", (d,i) => "g"+i)
+    .style("stroke", "transparent")
+    .style("stroke-width", 15)
     .style("fill", (d, i) => color(i))
+    .attr("class", (d,i) => "c"+i)
     .attr("y", (d, i) => Math.round(i * h))
     .attr("height", hRect)
     .attr("width", d => Math.round(x(d)));
@@ -440,10 +442,10 @@ export function drawPanel(chart, data, opt, type) {
 }
 
 function barHTextLabel(chart, x, h, n) {
-    chart.selectAll("text")
+    chart.selectAll(".x")
     .data(d => d).enter()
     .append("text")
-    .attr("class", (d,i) => "g"+i)
+    .attr("class", (d,i) => "axis x c"+i)
     .attr("x", d => {
         var posX = x(d);
         return x(d) + ((posX > 600 || n===1) ? 0:7);
@@ -466,15 +468,19 @@ function barHTextGroup(chart, x, h, groups) {
     chart
     .data(groups)
     .append("text")
+    .attr("class", "axis y")
+    .attr("x", 0)
     .attr("y", "-8")
     .text(d => d); 
 }
 
 function barHText(chart, x, h, groups) {  
     chart
-    .selectAll("text")
+    .selectAll(".axis-y")
     .data(groups).enter()
     .append("text")
+    .attr("class", "axis-y")
+    .attr("x", 0)
     .attr("y", (d, i) => i*h - 8)
     .text(d => d); 
 }

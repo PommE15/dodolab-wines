@@ -39,21 +39,21 @@ export default function(el, data, cols) {
         update: true
         }, el.id);
     
-    var svgId = document.querySelector("#editChart svg").id;
-    if (svgId.indexOf("barH") > -1) {
+    var svg = document.querySelector("#editChart svg");
+    if (svg.id.indexOf("barH") > -1) {
         chart.select("g").attr("transform", "translate(0, 20)");
     }
     
     // load palette colors
-    var config = {};
+    var config = {}; 
     d3.select(".palette")
     .selectAll("li")
     .data(color.range()).enter()
     .append("li")
     .style("background-color", d => d)
-    .on("click", d => config.color = d);
+    .on("click", (d, i) => config.color = d);
 
-    // edit panel
+    // edit colors
     var rects = chart.selectAll("rect")
     .on("click", (d, i) => {
         var self = rects[0][i],
@@ -62,11 +62,46 @@ export default function(el, data, cols) {
         self.style.fill = config.color;
         parent.querySelector("text."+cn).style.fill = config.color;
     }); 
-    console.log(rects);
+    
+    // edit position
+    var text = null;
+    /*var inline = editPanel.querySelector(".js-inlinedit");
+    svg.addEventListener("click", (e) => {
+        if (text) { text.setAttribute("stroke", "transparent"); }
+        document.removeEventListener("keydown", moveText, false);
+        if (e.target.classList.contains("axis")) {
+            inline.classList.remove("d-n");                
+            text = e.target;
+            inline.textContent = text.textContent;
+            inline.style.top = text.offsetTop + "px";
+            inline.style.left = text.offsetLeft + "px";
+            inline.focus();
+            console.log(text.getBoundingClientRect(), e); 
+            //TODO: debug position
+        }
+    }, false);*/
+    svg.addEventListener("dblclick", (e) => {
+        if (e.target.classList.contains("axis")) {
+            text = e.target;
+            text.setAttribute("stroke", "#333");
+            document.addEventListener("keydown", moveText, false);
+        }
+    }, false);
+    function moveText(e) {
+        var key = e.keyCode,
+            val = 0; 
+        switch(key) {
+            case 37: val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)-1); break;
+            case 39: val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)+1); break;
+            case 38: val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)-1); e.preventDefault(); break; 
+            case 40: val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)+1); e.preventDefault(); break;
+            default: break;
+        }
+    }
+    
 
     // load embed code
     // TODO: svgContent, svg with x,y,viewbox
-    var svg = document.querySelector("#editChart svg");
 
     var XMLS = new XMLSerializer(),
         code = XMLS.serializeToString(svg); 
