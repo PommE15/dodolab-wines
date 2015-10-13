@@ -22,8 +22,8 @@ function addChartGroups(el, id, data, opt) {
     var chart = addChart(el, id, opt)
     .selectAll(".group")
     .data(data)
-    .enter().append("g");
-    //.attr("class", "g");
+    .enter().append("g")
+    .attr("class", "group");
     
     return chart;
 }
@@ -101,12 +101,13 @@ export function barHorizontalGroup(chartEl, data, opt) {
         opt.height = nPanel * h; 
         hGroup = (nColor+2) * h;
     }
-
-    var x = d3.scale.linear()
-    .domain([0, d3.max(data.glist.map(arr => d3.max(arr)))])
+ 
+    var max = d3.max(data.glist.map(arr => d3.max(arr)));
+    /*var x = d3.scale.linear()
+    .domain([0, max])
     .range([0, opt.width - opt.space]);
-    
-    var chart = addChartGroups(chartEl, "barHG", data.glist, opt)
+    */
+    var chart = addChartGroups(chartEl, "barHG", data.tests, opt)
     .attr("transform", (d, i) => "translate(0," + Math.round(i*hGroup) + ")");
     
     chart.selectAll("rect")
@@ -118,11 +119,12 @@ export function barHorizontalGroup(chartEl, data, opt) {
     .attr("class", (d,i) => "c"+i)
     .attr("y", (d, i) => Math.round(i * h))
     .attr("height", hRect)
-    .attr("width", d => Math.round(x(d)));
+    .attr("width", d => Math.round(d.val*100/max) + "%");
     
-    if (opt.update) { 
-        barHTextLabel(chart, x, h, nColor); 
-        barHTextGroup(chart, x, h, data.group); 
+    // add text
+    if (opt.state !== null) { 
+        barHTextLabel(chart, max, opt.width, h, nColor); 
+        barHTextGroup(chart, data.group); 
     }
 }
 
@@ -423,7 +425,7 @@ export function drawCharts(chartEl, data, opt) {
         treeMap(chartEl, data, opt);
     }
 } 
-export function drawPanel(chart, data, opt, type) {
+export function drawChart(chart, data, opt, type) {
     switch(type) {
         case "barH":    barHorizontal(chart, data, opt); break;
         case "barV":    barVertical(chart, data, opt); break;
@@ -441,37 +443,39 @@ export function drawPanel(chart, data, opt, type) {
     }
 }
 
-function barHTextLabel(chart, x, h, n) {
+function barHTextLabel(chart, max, w, h, n) {
+    var isTooLong = false;    
     chart.selectAll(".x")
-    .data(d => d).enter()
-    .append("text")
+    .data(d => d)
+    .enter().append("text")
     .attr("class", (d,i) => "axis x c"+i)
     .attr("x", d => {
-        var posX = x(d);
-        return x(d) + ((posX > 600 || n===1) ? 0:7);
+        isTooLong = ((d.val+30)>max || n===1) ? true:false;
+        return Math.round(d.val*100/max) + (isTooLong ? 0:1) + "%";
     })
     .attr("y", (d, i) => {
-        var posX = x(d),
-            shiftX = (posX > 600 || n===1) ? (-8) : 8;
+        isTooLong = ((d.val+30)>max || n===1) ? true:false;
+        var shiftX = isTooLong ? (-8) : 8;
         return Math.round(i*h) + shiftX;
     })
     .style("fill", (d, i) => color(i))
     .style("text-anchor", d => {
-        var posX = x(d);
-        return (posX > 600 || n===1) ? "end" : "start";
+        isTooLong = ((d.val+30)>max || n===1) ? true:false;
+        return isTooLong ? "end" : "start";
     })
-    .text(d => d.toLocaleString()); 
+    .text(d => d.val.toLocaleString()); 
     //TODO: remove temp toLocale*
 }
 
-function barHTextGroup(chart, x, h, groups) {  
+function barHTextGroup(chart, groups) {  
+    console.log(groups);
     chart
     .data(groups)
     .append("text")
     .attr("class", "axis y")
     .attr("x", 0)
     .attr("y", "-8")
-    .text(d => d); 
+    .text((d, i) => d); 
 }
 
 function barHText(chart, x, h, groups) {  

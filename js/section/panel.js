@@ -1,5 +1,7 @@
 import editPanelHTML from "html/editPanel.html!text";
-import {drawPanel} from "js/component/createCharts";
+import {drawChart} from "js/component/createCharts";
+import sectionCode from "js/section/code"; 
+import {throttle} from "js/lib/underscore-lite";
 
 var color = d3.scale.ordinal()
     .range([
@@ -27,23 +29,43 @@ export default function(el, data, cols) {
     .attr("contentEditable", true)
     .text(d => data.count.color!==1 ? d:"Key or second line here if needed");
     
-    // load svg chart to the panel
-    var width = 620;
+    // load svg and text to the panel
+    var width = editPanel.querySelector(".panel-chart").offsetWidth;
     var chart = d3.select("#editChart");
-    
-    drawPanel(chart, data, {
-        width: width,
-        height: null,
-        margin: 0,
-        space: 0,
-        update: true
-        }, el.id);
-    
-    var svg = document.querySelector("#editChart svg");
+    var svg,
+        opt = { width: width,
+                height: null,
+                margin: 0,
+                space: 0,
+                state: "new"
+              };
+    // new
+    drawChart(chart, data, opt, el.id); 
+    svg = document.querySelector("#editChart svg");
     if (svg.id.indexOf("barH") > -1) {
         chart.select("g").attr("transform", "translate(0, 20)");
     }
-    
+    // update
+    function updateChart() {
+        opt.width = editPanel.querySelector(".panel-chart").offsetWidth;
+        if (width === opt.width) return; 
+        
+        svg.setAttribute("width", width); 
+        width = opt.width;
+    }
+    window.addEventListener('resize', throttle(updateChart, 500));
+    /*console.log(data);
+    chart.append("div")
+    .selectAll(".y")
+    .data(data.group).enter()
+    .append("div")
+    .style("position", "absolute")
+    .style("left", 0)
+    .style("top", (d, i) => i*42-1+"px")
+    .attr("contenteditable", "true")
+    .text(d => d);
+    */
+
     // load palette colors
     var config = {}; 
     d3.select(".palette")
@@ -65,21 +87,11 @@ export default function(el, data, cols) {
     
     // edit position
     var text = null;
-    /*var inline = editPanel.querySelector(".js-inlinedit");
+    
     svg.addEventListener("click", (e) => {
         if (text) { text.setAttribute("stroke", "transparent"); }
         document.removeEventListener("keydown", moveText, false);
-        if (e.target.classList.contains("axis")) {
-            inline.classList.remove("d-n");                
-            text = e.target;
-            inline.textContent = text.textContent;
-            inline.style.top = text.offsetTop + "px";
-            inline.style.left = text.offsetLeft + "px";
-            inline.focus();
-            console.log(text.getBoundingClientRect(), e); 
-            //TODO: debug position
-        }
-    }, false);*/
+    }, false);
     svg.addEventListener("dblclick", (e) => {
         if (e.target.classList.contains("axis")) {
             text = e.target;
@@ -91,19 +103,21 @@ export default function(el, data, cols) {
         var key = e.keyCode,
             val = 0; 
         switch(key) {
-            case 37: val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)-1); break;
-            case 39: val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)+1); break;
-            case 38: val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)-1); e.preventDefault(); break; 
-            case 40: val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)+1); e.preventDefault(); break;
+            case 37: 
+                val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)-1); break;
+            case 39: 
+                val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)+1); break;
+            case 38: 
+                val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)-1); 
+                e.preventDefault(); break; 
+            case 40: 
+                val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)+1); 
+                e.preventDefault(); break;
             default: break;
         }
     }
     
 
     // load embed code
-    // TODO: svgContent, svg with x,y,viewbox
-
-    var XMLS = new XMLSerializer(),
-        code = XMLS.serializeToString(svg); 
-    document.querySelector("#embedCode").textContent = code;
+    sectionCode(editPanel);    
 }

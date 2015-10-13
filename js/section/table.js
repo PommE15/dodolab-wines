@@ -28,7 +28,13 @@ export default function(data) {
         dataChart.color = keys.slice(1, keys.length);
         dataChart.clist = cols.slice(1, cols.length);
         dataChart.group = cols[0];
-        dataChart.glist = cols[0].map((d3, i) => dataChart.clist.map(d1 => d1[i]));
+        dataChart.glist = cols[0].map((r, i) => 
+            dataChart.clist.map(c => c[i])
+        );
+        dataChart.tests = cols[0].map((r, i) => 
+            dataChart.clist.map(c => {
+                return {key: r, val: c[i]};
+        }));
         dataChart.count = {
             color: dataChart.color.length,
             group: dataChart.group.length

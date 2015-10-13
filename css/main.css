@@ -165,7 +165,11 @@ h2 {
     color: #808080;
     font-size: 15px;
     font-family: 'Guardian Text Sans Web', Arial, sans-serif;;
-    width: 620px; //max-width: 860px;
+    width: 100%;
+    max-width: 860px;
+}
+.panel-header {
+    margin: 20px 0;
     h3 {
     color: #000;
     font-size: 20px;
@@ -179,6 +183,8 @@ h2 {
     margin-top: 15px;
     margin-bottom: 5px;
     }
+}
+.panel-main {
     rect, circle, path {
         cursor: pointer;
     }

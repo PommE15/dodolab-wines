@@ -35,14 +35,12 @@
         </section>
 
         <section class="sec-code c-white">
-            <h2>Get your embeded code</h2>            
-            <div>
-                <code id="embedCode" class="fz-12"></code>
-            </div>
+            <h2>Get your embeded code</h2>
+            <div id="embedCode"></div> 
         </section>
 
         <script>
-            // loads main.js
+        // loads main.js
         System.import('js/main').then(function(main){
             main.init();
         });

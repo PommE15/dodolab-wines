@@ -22,7 +22,8 @@ export default function(data) {
         width : width,
         height: Math.round(width * 2 * 10 / 3)/10,
         margin: 10, //border: 10,
-        space : 40  //margin*2 + border*2,
+        space : 40, //margin*2 + border*2,
+        state : null
     };
     
     console.log("data chart:");
