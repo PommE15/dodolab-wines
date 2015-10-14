@@ -3,8 +3,6 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/lib/font-min.css">
-        <link rel="stylesheet" type="text/css" href="css/lib/pure-min.css">
         <link rel="stylesheet" type="text/less" href="css/main.css">
         <script src="css/lib/less-min.js"></script>
         <script src="jspm_packages/system.js"></script>
@@ -12,31 +10,32 @@
         <title></title>
     </head>
     <body>
-        <h1 class="w-center">Kind of RAW</h1>
-
         <section class="sec-form">
-            <h2>Import data</h2>
+            <h2>1> Import data</h2>
             <div id="importForm"></div>
         </section>
 
         <section class="sec-table">  
-            <h2>Clean the table</h2> 
+            <a name="sec2"></a>
+            <h2>2> Edit this data</h2> 
             <div id="toggleTable" class="d-n"></div>
         </section>
 
         <section class="sec-chart">
-            <h2>Select a chart</h2>            
+            <a name="sec3a"></a>
+            <h2>3> Select a chart</h2> 
+            <a name="sec3b"></a>
             <div id="chartList" class="d-n pb-40"></div>
         </section>
 
         <section class="sec-panel">
-            <h2>Edit this visualization</h2>
-            <div id="editPanel"></div> 
+            <h2>4> Edit your chart</h2>
+            <div id="editPanel" class="d-n"></div> 
         </section>
 
-        <section class="sec-code c-white">
-            <h2>Get your embeded code</h2>
-            <div id="embedCode"></div> 
+        <section class="sec-code c-white cbg-grey1">
+            <h2>5> Voilà</h2>
+            <div id="embedCode" class="d-n"></div> 
         </section>
 
         <script>

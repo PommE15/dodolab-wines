@@ -3,7 +3,10 @@ function getDataType(data) {
 }
 
 function setDataToggleDefault(data) {
-    return data.map(d => true);
+    return data.map(() => true);
+}
+function setDataRadioDefault(data) {
+    return data.map((d, i) => i===0 ? true:false);
 }
 
 function parseNumber(data) {
@@ -20,16 +23,18 @@ function str2num(str) {
 export default function(el, data) {
     /* data */
     // remap for table
-    var dataTable = {}, dataBtns = {};
+    var dataTable = {}, dataBtns = {}, dataSort = [];
     
     dataTable.head = data.rows.splice(0, 1)[0];
     dataTable.body = data.rows[0].map((d2, i) => data.rows.map(d1 => d1[i]));
     dataTable.body = parseNumber(dataTable.body);
     dataTable.type = getDataType(dataTable.body);
+    dataSort = ["default"].concat(dataTable.head);
     
     dataBtns = {
         cols: setDataToggleDefault(dataTable.head),
-        rows: setDataToggleDefault(dataTable.body[0])
+        rows: setDataToggleDefault(dataTable.body[0]),
+        sort: setDataRadioDefault(dataSort),
     };
     console.log("data table:");
     console.log(dataTable);
@@ -41,6 +46,7 @@ export default function(el, data) {
     // add toggle btns
     addToggleBtns(el, dataTable.head, dataBtns.cols, "#colBtns", "col-");    
     addToggleBtns(el, dataTable.body[0], dataBtns.rows, "#rowBtns", "row-");    
+    addRadioBtns(el, dataSort, dataBtns.sort, "#sortBtns", "sort-");    
 
     // add table with data
     addDataTable(data, dataTable);
@@ -53,20 +59,45 @@ export default function(el, data) {
 }
 
 
-function addToggleBtns(el, dataText, dataBtn, id, cn){
-    d3.select(id)
+function addBtns(el, dataText, dataBtn, id, cn){
+    var btns = d3.select(id)
     .selectAll("input")
     .data(dataText)
     .enter().append("input")
     .attr("type", "button")
-    .attr("class", (d, i) => "pure-button " + cn + i)
-    .attr("value", d => d)
+    .attr("class", (d, i) => { 
+        var isOff = dataBtn[i] ? "" : " btn-off";
+        return "pure-button " + cn + i + isOff;
+    })
+    .attr("value", d => d);
+    return btns;
+}
+
+function addToggleBtns(el, dataText, dataBtn, id, cn){
+    addBtns(el, dataText, dataBtn, id, cn)
     .on("click", (d, i)=> {
-        // update view
+        // update view (table)
         var els = [ ... el.querySelectorAll("." + cn + i)];
-        els.forEach(e => e.classList.toggle("btn-toggle-off"));
+        els.forEach(e => e.classList.toggle("btn-off"));
         // update data
-        dataBtn[i] = dataBtn[i]===true ? false : true;
+        dataBtn[i] = dataBtn[i] ? false : true;
+    });
+}
+
+function addRadioBtns(el, dataText, dataBtn, id, cn){
+    var btns = addBtns(el, dataText, dataBtn, id, cn);
+    btns
+    .on("click", (d, i)=> {
+        btns.classed("btn-off", (d,j) => {
+            var isOff = i===j ? false:true;
+            // update data
+            dataBtn[j] = !isOff;
+            // update view (buttons)
+            return isOff;
+        });
+        
+        // TODO: sort data
+        // using data.rows
     });
 }
 

@@ -22,7 +22,12 @@ export default function() {
             case "inputKey": importJsonFromS3(text); break;
             case "inputCSV": importCSV(text); break;
         }
-        
+       
+        // section control 
+        document.querySelector("section").style.height = "auto";
         document.querySelector(".sec-table > div").classList.remove("d-n");
+        document.querySelector(".sec-chart > div").classList.add("d-n");
+        document.querySelector(".sec-panel > div").classList.add("d-n");
+        document.querySelector(".sec-code > div").classList.add("d-n");
     }, false);
 }

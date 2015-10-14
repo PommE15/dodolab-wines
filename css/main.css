@@ -1,217 +1,23 @@
-/* variables */
-@c-blue1: #005689;
-@c-blue2: #4dc6dd;
-@c-grey1: #333333;
-@c-grey2: #767676;
-@c-grey6: #eaeaea;
-@c-grey7: #f1f1f1;
-@c-grey8: #f6f6f6;
+/* import files */
+@import "/css/lib/pure-min.css";
+@import "/css/lib/font.css";
+@import "/css/variable.less";
+@import "/css/atomic.less";
+@import "/css/layout.less";
+@import "/css/component.less";
+@import "/css/section/panel.less";
+@import "/css/section/table.less";
 
 
-/* rest browser */ 
+/* reset browser */ 
 body {
     font-family: sans-serif;
 }
 
-section:nth-child(even) {
-    background-color: @c-grey8;
-}
-section > div {
-    &:extend(.w-center);
-    padding: 0 0 30px;
-    overflow: hidden;
-}
-
-h2 {
-    &:extend(.w-center);
-    font-size: 22px;
-    margin: 0;
-    padding: 30px 0;
+input[type=button] {
+    border-radius: 15px;
 }
 
 [contentEditable=true] {
     outline: none;
-}
-
-/* atomic-liked css*/
-.ff-s  { font-family: serif; }
-.ff-ss { font-family: sans-serif; }
-.ff-m  { font-family: monospace !important; }
-.fz-20 { font-size: 20px; }
-.fz-12 { font-size: 12px; }
-.fz-15 { font-size: 15px; }
-.fw-b  { font-weight: bold; }
-
-.c-white { color: white; }
-.cf-blue2 { fill: @c-blue2; }
-.cf-grey1 { fill: @c-grey2; }
-
-.w-center {
-    max-width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-.w-100 { width:  100%;  }
-.h-35p { height: 35vh; min-height: 200px; }
-.h-34  { height: 34px;  }
-
-.mt-5  { margin-top: 5px; }
-.mb-15 { margin-bottom: 15px; }
-.pb-40 { padding-bottom: 40px; }
-
-.pos-r { position: relative; }
-.pos-a { position: absolute; }
-
-.d-n { display: none; }
-.d-b { display: block; }
-.f-r { float: right; }
-.r-v { resize: vertical; }
-.o-s { overflow: scroll; }
-
-.ta-str { text-anchor: start; }
-.ta-end { text-anchor: end; }
-
-.b-1sg8 { border: 1px solid @c-grey8; }
-
-
-/* custom css */
-/* section form */
-.btn-import {
-    width: ~"calc(100% / 3 - 5px)";
-    margin-left: 5px;
-}
-
-/* section table */
-.sec-table {
-    .table-type {
-        color: green;
-        font-style: italic;
-        font-weight: normal;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-    th {
-        min-width: 140px;
-    }
-    tbody tr:nth-child(even) {
-        background-color: @c-grey8;
-    }
-
-    // hide elements 
-    input.col-0,
-    .col-0 span {
-        display: none;
-    }
-}
-
-.btn-toggle div {
-    margin-bottom: 15px;
-}
-.btn-toggle input {
-    font: 12px monospace !important;
-    font-weight: bold !important;
-    width: ~"calc((100% - 60px) / 6)";
-    padding: 5px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    border-radius: 15px;
-}
-.btn-toggle-off {
-    opacity: 0.4;
-    text-decoration: line-through;
-}
-/*section charts*/
-.sec-chart {
-    padding-bottom: 10px;
-
-    svg {
-        border: 10px solid @c-grey6;
-        margin-right: -10px;
-        margin-bottom: -10px;
-        vertical-align: top;
-        box-sizing: border-box;
-    }
-    svg:hover {
-        background-color: white;
-        cursor: pointer;
-    }
-    svg * {
-        pointer-events: none;
-    }
-}
-
-/* section panel */
-.sec-panel {   
-    [contentEditable=true]:hover {
-        border-bottom: 1px dotted @c-grey2;
-    } 
-    .input-line {
-        width: 60px;        
-        display: inline-block;
-        border-bottom: 1px dotted @c-grey2;
-        line-height: 1.5em;
-        text-align: center;
-    }
-}
-.panel-basic { 
-    font-family: monospace; 
-    padding: 10px;
-    background-color: #f1f1f1;
-    line-height: 2em;
-}
-.panel-chart {
-    color: #808080;
-    font-size: 15px;
-    font-family: 'Guardian Text Sans Web', Arial, sans-serif;;
-    width: 100%;
-    max-width: 860px;
-}
-.panel-header {
-    margin: 20px 0;
-    h3 {
-    color: #000;
-    font-size: 20px;
-    font-family: 'Guardian Egyptian Web', Georgia, serif;;
-    font-weight: bold;
-    border-bottom: 1px solid @c-grey7;    
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-    }    
-    h4 {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    }
-}
-.panel-main {
-    rect, circle, path {
-        cursor: pointer;
-    }
-}
-.panel-footer {
-    color: @c-grey2;
-    font-family: 'Guardian Text Sans Web', Arial, sans-serif;;
-    font-size: 13px;
-    border-top: 2px solid @c-grey7;
-    padding-top: 5px;
-}
-.palette { 
-    display: inline-block;
-    margin: 0;
-    vertical-align: top;
-    padding-left: 15px;    
-    height: 32px;
-    li {
-    width: 34px;
-    height: 100%;
-    border-radius: 20px;
-    display: inline-block;
-    margin-right: 10px;
-    cursor: pointer;
-}}
-
-/* section code */
-.sec-code {
-    background-color: @c-grey1 !important;
 }

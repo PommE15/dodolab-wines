@@ -1,10 +1,15 @@
-<div class="panel-basic">
+<div class="panel-basic pos-r">
     <div>Width x Height:
-        <span contenteditable="true" class="input-line js-width"></span> x 
-        <span contenteditable="true" class="input-line js-height"></span>   
+        <span class="js-width"></span> x 
+        <span class="js-height"></span> px 
     </div>
-    <div>Data sorted by:</div>
     <div>Color palette:<ul class="palette"></ul></div>
+    <div class="js-responsive">Responsive: 
+        <span class="pos-300" data-res="300">300 |</span>
+        <span class="pos-620" data-res="620">| 620</span>
+        <span class="pos-860" data-res="860">| 860</span>
+        <span class="pos-res" data-res="null"></span>
+    </div>
 </div>
 
 <div class="panel-chart">
@@ -15,7 +20,7 @@
     </div>
     <div class="panel-main pos-r" id="editChart"></div>
     <div class="panel-footer">
-        <span contenteditable="true">Guardian graphic</span>
-        <span class="f-r">Source: <span contenteditable="true">Edit source here*</span></span>
+        <span><span contenteditable="true">Source: Edit source here*. </span>Guardian graphic</span>
+        <!-- TODO: add ..  -->
     </div>
 </div>

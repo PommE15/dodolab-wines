@@ -16,6 +16,10 @@ export default function(el, data, cols) {
     editPanel = document.querySelector("#editPanel");
     editPanel.innerHTML = editPanelHTML;
     
+    // section control
+    editPanel.classList.remove("d-n");
+    document.querySelector(".sec-code > div").classList.remove("d-n");
+    
     // load chart keys
     var colorKeys = data.color;//data.keys.slice(1, data.keys.length);
     d3.select(".js-keys")
@@ -30,9 +34,10 @@ export default function(el, data, cols) {
     .text(d => data.count.color!==1 ? d:"Key or second line here if needed");
     
     // load svg and text to the panel
+    // TODO: restructure and rename
     var width = editPanel.querySelector(".panel-chart").offsetWidth;
     var chart = d3.select("#editChart");
-    var svg,
+    var svg, config = {},
         opt = { width: width,
                 height: null,
                 margin: 0,
@@ -41,33 +46,49 @@ export default function(el, data, cols) {
               };
     // new
     drawChart(chart, data, opt, el.id); 
-    svg = document.querySelector("#editChart svg");
+    
+    config.width = editPanel.querySelector(".js-width");
+    config.width.textContent = width; 
+    editPanel.querySelector(".js-height").textContent = editPanel.querySelector(".panel-chart").offsetHeight;
+    
+    svg = editPanel.querySelector("#editChart svg");
     if (svg.id.indexOf("barH") > -1) {
         chart.select("g").attr("transform", "translate(0, 20)");
+    } else {
+        svg.setAttribute("viewBox", "0 0 "+ svg.getAttribute("width") + " " + svg.getAttribute("height"));
+        svg.setAttribute("perserveAspectRatio", "xMinYmin meet");
+        svg.setAttribute("height", "100%");
     }
+    svg.setAttribute("width", "100%");
+    
     // update
-    function updateChart() {
-        opt.width = editPanel.querySelector(".panel-chart").offsetWidth;
-        if (width === opt.width) return; 
-        
-        svg.setAttribute("width", width); 
-        width = opt.width;
+    function resizeChart() {
+        config.width = editPanel.querySelector(".panel-chart").offsetWidth;
+        if (width === config.width) return; 
+        updateChart(width);
+        width = config.width;
     }
-    window.addEventListener('resize', throttle(updateChart, 500));
-    /*console.log(data);
-    chart.append("div")
-    .selectAll(".y")
-    .data(data.group).enter()
-    .append("div")
-    .style("position", "absolute")
-    .style("left", 0)
-    .style("top", (d, i) => i*42-1+"px")
-    .attr("contenteditable", "true")
-    .text(d => d);
-    */
+    function updateChart(width) {
+        //svg.setAttribute("width", width); 
+        config.width.textContent = width; 
+    }
+    window.addEventListener('resize', throttle(resizeChart, 500));
+    
+    var res = editPanel.querySelector(".pos-res");
+    editPanel.querySelector(".js-responsive").addEventListener("click", (e)=> {
+        var w = e.target.dataset.res;
+        if (w) { 
+            updateChart(w); 
+            res.style.left = w + "px"; 
+            editPanel.querySelector(".panel-chart").style.width = w + "px";
+        }
+        else { 
+            console.log(res, e.offsetX + "px");
+        } 
+    });
+
 
     // load palette colors
-    var config = {}; 
     d3.select(".palette")
     .selectAll("li")
     .data(color.range()).enter()
@@ -104,14 +125,18 @@ export default function(el, data, cols) {
             val = 0; 
         switch(key) {
             case 37: 
-                val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)-1); break;
+                val = text.getAttribute("x"); 
+                text.setAttribute("x", parseInt(val)-1); break;
             case 39: 
-                val = text.getAttribute("x"); text.setAttribute("x", parseInt(val)+1); break;
+                val = text.getAttribute("x"); 
+                text.setAttribute("x", parseInt(val)+1); break;
             case 38: 
-                val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)-1); 
+                val = text.getAttribute("y"); 
+                text.setAttribute("y", parseInt(val)-1); 
                 e.preventDefault(); break; 
             case 40: 
-                val = text.getAttribute("y"); text.setAttribute("y", parseInt(val)+1); 
+                val = text.getAttribute("y"); 
+                text.setAttribute("y", parseInt(val)+1); 
                 e.preventDefault(); break;
             default: break;
         }

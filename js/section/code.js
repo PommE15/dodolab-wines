@@ -8,21 +8,37 @@ export default function(el) {
     embedCode.innerHTML = embedCodeHTML;
     
     // svg download btn
-    var svgBtn;
+    var svgBtn, embedBtn;
     svgBtn = embedCode.querySelector("#svgBtn");
+    embedBtn = embedCode.querySelector("#embedBtn");
+    
     svgBtn.addEventListener("click", e => {
         
         // generate svg content for download
         // TODO: svgContent, svg with x,y,viewbox
         var svg = el.querySelector("#editChart svg");
-
-        var XMLS = new XMLSerializer(),
-            code = XMLS.serializeToString(svg); 
-        //document.querySelector(".js-code").textContent = code;
-        
-        //try {} catch (e) {}; 
-        // TODO: add fallback
-        var blob = new Blob([code], {type: "image/svg+xml"});
-        saveAs(blob, "chart.svg");
+        //svg.setAttribute("width", "100%"); 
+        download(svg, "image/svg+xml", "svg");
     });
+
+    embedBtn.addEventListener("click", e => {
+        el.querySelector("#editChart svg").setAttribute("width", "100%");
+        
+        var node = el.querySelector(".panel-chart").cloneNode(true);
+        download(node, "text/html", "html");
+    });
+
+}
+
+function download(content, type, format) {
+    var XMLS = new XMLSerializer(),
+        text = XMLS.serializeToString(content); 
+        
+    // TODO: add fallback
+    //try {} catch (e) {};    
+    var blobEmbed = new Blob([text], {type: type});
+    
+    saveAs(blobEmbed, "chart." + format);
+    //document.querySelector(".js-code").textContent = embed;
+    //console.log(code);
 }

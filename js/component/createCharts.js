@@ -30,7 +30,7 @@ function addChartGroups(el, id, data, opt) {
 
 
 export function barHorizontal(chartEl, data, opt) {
-    
+    console.log(data);    
     var nColor = data.count.group,
         nChart = (nColor*2) - 1,
         nPanel = (nColor*4);
@@ -398,12 +398,15 @@ export function dotsChart(chartEl, data, opt) {
 
 export function drawCharts(chartEl, data, opt) {
      if (data.group.length === 1) {
-        //TODO: fix demo charts
-        var dataTweak = data.clist.map(d=>d[0]);
-        barHorizontal(chartEl, dataTweak, opt);
-        barVertical(chartEl, dataTweak, opt);
-        barHorizontalStack100(chartEl, dataTweak, opt);
-        pieChart(chartEl, dataTweak, opt);
+        treeMap(chartEl, data, opt);
+        // remap data to alter chart 
+        data.clist = data.glist;
+        data.count.group = data.count.color;
+        pieChart(chartEl, data.clist[0], opt);
+        barHorizontal(chartEl, data, opt);
+        barVertical(chartEl, data, opt);
+        barHorizontalStack100(chartEl, data.clist[0], opt);
+        lineChart(chartEl, data.clist, opt);
     }
     else if (data.color.length === 1) {
         lineChart(chartEl, data.clist, opt);
@@ -468,7 +471,6 @@ function barHTextLabel(chart, max, w, h, n) {
 }
 
 function barHTextGroup(chart, groups) {  
-    console.log(groups);
     chart
     .data(groups)
     .append("text")

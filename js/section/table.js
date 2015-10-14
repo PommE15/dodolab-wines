@@ -41,8 +41,9 @@ export default function(data) {
         };
         
         sectionCharts(dataChart);
-        //console.log(dataChart);
-
+        // section control
+        document.querySelector(".sec-panel > div").classList.add("d-n");
+        document.querySelector(".sec-code > div").classList.add("d-n");
     }, false);
 }
 

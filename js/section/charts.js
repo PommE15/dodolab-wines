@@ -17,7 +17,8 @@ export default function(data) {
     
     // draw charts
     // TODO: responsive on resize
-    var width = (1024 + 30) / 4,
+    var num = 6,
+        width = (1024 + (num-1)*10) / num,
         opt = {
         width : width,
         height: Math.round(width * 2 * 10 / 3)/10,
@@ -37,6 +38,8 @@ export default function(data) {
         var el = e.target;
         if (el instanceof SVGElement) { 
             sectionPanel(el, data); 
+            window.location.hash = ""; // hack!?
+            window.location.hash = "#sec3b";
         }
     }, false);
 }
