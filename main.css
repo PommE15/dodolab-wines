@@ -1,6 +1,7 @@
 /* hack browser */ 
 body {
     margin: 0;
+    line-height: 1.25;
 }
  
 /* atomic-liked css*/
@@ -8,29 +9,75 @@ body {
     width: 100vw;
     height: 100vh;
 }
-.p-f {
-    position: fixed;
-}
+.p-f { position: fixed; }
+.mt-30 { margin-top: 25vh; }
+
+.ff-ss { font-family: sans-serif; }
+.fs-24 { font-size: 24px; }
+.fs-14 { font-size: 14px; }
+
+.ta-r { text-align: right; }
+.td-u { text-decoration: underline; }
+
 
 /* custom css */
 .home {
-    color: #fff;
-    background-image: url("https://c2.staticflickr.com/8/7391/10656265925_73388c49bc.jpg");
+    color: #000;
+    text-align: center;
+    height: 90vh;
+    background-image: url("imgs/bg7.jpg");
     background-attachment: fixed;
+    background-position: center;
     background-size: cover;
     border: 1px solid rgba(100, 100, 100, 0.25);
 }
 .brands {
+    min-height: 100vh;
     background-color: #fff;
     border: 1px solid #fff;
+    padding: 30px;
 }
 .products {
     background-color: #eee;
-    border: 1px solid #eee;
+    border: 1px solid #eee; 
 }
+.row { 
+    overflow: hidden;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.col-2 {
+    width: calc(100% / 2);
+    float: left;
+    box-sizing: border-box;
+    //border: 1px solid lightgrey;
+    padding: 15px;
+}
+.cava-desc {
+    min-height: 220px;
+}
+.bg-cava {
+    color: #fff;
+    background-image: url("imgs/bg-cava.jpg");
+    background-size: cover;
+    background-position: center;
+}
+.cava-list div {
+    min-height: 64px;
+    border: 5px solid white;
+}
+.cava-list [class*="bg-cava"] {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.bg-cava1 { background-image: url("imgs/bg-cava1.png"); }
+.bg-cava2 { background-image: url("imgs/bg-cava2.png"); }
+.bg-cava3 { background-image: url("imgs/bg-cava3.png"); }
+
 .contact {
+    height: 100px;
     background-color: #333;
-    height: 300px;
 }
 
 .che {}

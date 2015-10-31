@@ -8,8 +8,12 @@
         var data = sheet.feed.entry,
             list = data.map(function(d){
                 var datum = {
-                    headline: d.gsx$headline.$t,
-                    context: d.gsx$context.$t
+                    id: d.gsx$id.$t,
+                    name: d.gsx$name.$t,
+                    cave: d.gsx$cave.$t,
+                    origin: d.gsx$origin.$t,
+                    title: d.gsx$title.$t,
+                    desc: d.gsx$desc.$t
                 };
                 return datum;
             });
@@ -17,6 +21,8 @@
         console.log(list); 
         
         //TODO: load data to the page
+        listEl = document.querySelector(".js-list");
+        
     });
 
 })();
