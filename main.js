@@ -12,8 +12,8 @@
                     name: d.gsx$name.$t,
                     cave: d.gsx$cave.$t,
                     origin: d.gsx$origin.$t,
-                    title: d.gsx$title.$t,
-                    desc: d.gsx$desc.$t
+                    desc: d.gsx$desc.$t,
+                    list: d.gsx$details.$t
                 };
                 return datum;
             });
@@ -21,8 +21,15 @@
         console.log(list); 
         
         //TODO: load data to the page
-        listEl = document.querySelector(".js-list");
+        var cavaDesc = document.querySelector(".js-cava-desc");
+        var cavaList = document.querySelector(".js-cava-list");
+        cavaDesc.textContent = list[1].desc;
         
+        var szDesc = document.querySelector(".js-sz-desc");
+        szDesc.textContent = list[4].desc;
+                
+        var sangriaDesc = document.querySelector(".js-sgr-desc");
+        sangriaDesc.textContent = list[0].desc + list[0].list;
     });
 
 })();
