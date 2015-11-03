@@ -1,21 +1,25 @@
 /* hack browser */ 
 body {
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.5;
+  font-size: 14px;
 }
-
+h3 {
+  font-size: 24px;
+}
 /* atomic-liked css*/
 .z-100 {
   width: 100vw;
   height: 100vh;
 }
 .p-f { position: fixed; }
-.mt-30 { margin-top: 25vh; }
-.pt-80 { padding-top: 80px; }
+
+.mb-0   { margin-bottom: 0; }
+.mt-30  { margin-top: 25vh; }
+.pt-120 { padding-top: 120px; }
 
 .ff-ss { font-family: sans-serif; }
-.fs-24 { font-size: 24px; }
-.fs-14 { font-size: 14px; }
+.fs-18 { font-size: 18px; }
 
 .ta-r { text-align: right; }
 .ta-c { text-align: center; }
@@ -46,6 +50,42 @@ body {
   background-color: #eee;
   border: 1px solid #eee; 
 }
+
+.esp-cava {
+  width: calc(100% - 60px);
+  //min-height: 50vh;
+  margin-top: 15px;
+}
+.esp-sz {
+  background-color: #f8f8fa;
+  //min-height: 50vh;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+
+/* cava */
+.cava-desc {
+  min-height: 200px;
+  margin-bottom: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.bg-cava {
+  color: #fff;
+  background-image: url("imgs/bg-cava.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+[class*="bg-cava-"] {
+  background-size: 200px auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bg-cava-1 { background-image: url("imgs/bg-cava-1.png"); }
+.bg-cava-2 { background-image: url("imgs/bg-cava-2.png"); }
+.bg-cava-3 { background-image: url("imgs/bg-cava-3.png"); }
+
 .row { 
   max-width: 1024px;
   overflow: auto;
@@ -61,64 +101,44 @@ body {
   width: 100%;
   min-height: 64px;
   border-top: 3px solid white;
-  float: left
+  float: left;
+  text-align: center;
 }
 @media (min-width: 960px) { .col-cd { width: 50%; } }
 @media (min-width: 960px) { .col-cl { width: 50%; } }
 @media (min-width: 740px) and (max-width: 959px) { .col-cd { width: 33.34%; } }
 @media (min-width: 740px) and (max-width: 959px) { .col-cl { width: 66.33%; } }
-@media (min-width: 480px) { .col-cl div { width: 50%; } }
+@media (min-width: 480px) { .col-cl div { width: 50%; text-align: left; } }
+/* end of cava */
 
-.esp-cava {
-  width: calc(100% - 60px);
-  margin-top: 15px;
-}
-.cava-desc {
-  min-height: 200px;
-  margin-bottom: 15px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-.bg-cava {
-  color: #fff;
-  background-image: url("imgs/bg-cava.jpg");
-  background-size: cover;
-  background-position: center;
-}
-
-.cava-list [class*="bg-cava"] {
-  background-size: 200px auto;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.bg-cava1 { background-image: url("imgs/bg-cava1.png"); }
-.bg-cava2 { background-image: url("imgs/bg-cava2.png"); }
-.bg-cava3 { background-image: url("imgs/bg-cava3.png"); }
-
-.esp-sz {
-  background-color: #f9f9f9;
-  padding-top: 5px;
-}
+/* sz table wines */
 .sz-list {
   overflow: auto;
   margin-top: 30px;
 }
 .sz-list div { 
-  width: calc(100% / 3); 
+  width: 300px; 
   height: 200px;
-  float: left; 
+  margin: auto;
+  padding: 15px;
+  padding-left: 85px;
+  box-sizing: border-box; 
 }
+@media (min-width: 480px) and (max-width: 739px) { .sz-list div { width: 50%; float: left; }}
+@media (min-width: 740px) { .sz-list div { width: 33%; float: left; } }
+
 [class*="bg-sz-"] {
   background-size: auto 200px;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: -5px center;
 }
-.bg-sz-w { background-image: url("imgs/bg-sz-w.jpg"); }
-.bg-sz-p { background-image: url("imgs/bg-sz-p.jpg"); }
-.bg-sz-r { background-image: url("imgs/bg-sz-r.jpg"); }
+.bg-sz-w { background-image: url("imgs/sz-w.png"); }
+.bg-sz-p { background-image: url("imgs/sz-p.png"); }
+.bg-sz-r { background-image: url("imgs/sz-r.png"); }
 
 .esp-sangria {
   min-height: 100vh;
+  margin-bottom: 0 !important;
 }
 .bg-sgr {
   background: top no-repeat url("imgs/bg-sgr-logo.jpg"),
@@ -131,9 +151,85 @@ body {
   line-height: 1.5;
   background: rgba(32, 0, 0, 0.5);
   width: 80%;
-  margin: 30vh auto 0 auto;
+  max-width: 600px;
+  margin: 20vh auto 0 auto;
   padding: 15px;
 }
+.sgr-desc a {
+  color: white;
+  font-style: italic;
+}
+
+.esp-cider {
+  color: white;
+  min-height: 100vh;
+  padding: 30px;
+  overflow: auto;
+}
+.cider-h3 {
+  font-size: 24px;
+  font-family: sans-serif;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  padding: 5px 0;
+  margin-left: 15px;
+}
+
+.bg-m {
+  background: right bottom no-repeat url("imgs/bg-cider.jpg");
+  background-size: contain;
+  background-color: rgb(15, 10, 15);
+}
+[class*="bg-m-"] {
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.bg-m-cider1 { background-image: url("imgs/m-cider-limit.jpg"); }
+.bg-m-cider2 { background-image: url("imgs/m-cider-classic.jpg"); }
+.bg-m-cider3 { background-image: url("imgs/m-cider-rose.jpg"); }
+.bg-m-sw1 { background-image: url("imgs/m-sw-white.jpg"); }
+.bg-m-sw2 { background-image: url("imgs/m-sw-rose.jpg"); }
+.bg-m-j1 { background-image: url("imgs/m-juiceapple.jpg"); }
+.bg-m-j2 { background-image: url("imgs/m-juicegrape.jpg"); }
+.bg-m-j3 { background-image: url("imgs/m-juicepeach.jpg"); }
+.bg-m-j4 { background-image: url("imgs/m-child.jpg"); }
+
+.col-m {
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+@media (min-width: 740px) { .col-m { width: calc(100% / 3); } }
+@media (max-width: 739px) and (min-width: 480px) { .col-m { width: calc(100% / 2); } }
+
+.col-m div {
+  font-size: 14px;
+  max-width: 256px;
+  min-height: 100px;
+  margin: 30px 15px;
+  border-bottom: 1px solid dimgrey;
+  background-color: rgba(15, 15, 0, 0.25);
+  padding-bottom: 15px;
+  padding-top: 110px;
+}
+
+.prt-cherry {
+  box-sizing: border-box;
+  margin: 0 30px;
+}
+.img-cherry {
+  width: 80%;
+  height: auto;
+  margin-left: 10%;
+  vertical-align: bottom;
+}
+.col-2 {
+  width: 100%;
+  display: inline-block;
+}
+@media (min-width: 740px) { .col-2 { width: calc(100% / 2); } }
+
 
 .contact {
   height: 100px;

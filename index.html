@@ -1,76 +1,106 @@
 <!doctype html>
 <html>
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <script src="./js/lib/d3-lite.js"></script>
-        <script src="main.js"></script>
-        <title></title>
-    </head>
-    <body>
-        <div class="home">
-          <h1 class="mt-30 fs-25">
-            女仕優選，獨家酒款
-          </h1>
-          <p class="ff-ss js-news">
-          <h2>
-            瑞士葡萄酒 | 桑格莉亞水果酒 | 蘋果氣泡酒 
-          </h2>
-          <p class="ff-ss">
-            11/13 (Fri) - 16 (Mon)<br>
-            台北國際酒展 / 南港展覽館</br>
-            與您相見
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="./js/lib/d3.min.js"></script>
+    <script src="main.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div class="home">
+      <h1 class="mt-30 fs-25">
+        女仕優選，獨家酒款
+      </h1>
+      <p class="ff-ss js-news">
+        <h2>
+          瑞士葡萄酒 | 桑格莉亞水果酒 | 蘋果氣泡酒 
+        </h2>
+        <p class="ff-ss">
+          11/13 (Fri) - 16 (Mon)<br>
+          台北國際酒展 / 南港展覽館</br>
+          與您相見
+        </p>
+        <p class=""> // 文理國際</p>
+      </div>
+      <div class="brands">
+        <div class="che"></div>
+        
+        <!-- cava -->
+        <div class="esp-cava row ">
+          <div class="cava-desc col-cd bg-cava ta-r">
+            <h3><span class="td-u">CAVA ALSINAC</span></h3>
+            <p class="js-cava-desc"></p>
+          </div>
+          <div class="cava-list col-cl">
+            <div class="bg-cava-1"></div><div class="js-cl"></div>
+            <div class="bg-cava-2"></div><div class="js-cl"></div>
+            <div class="bg-cava-3"></div><div class="js-cl"></div>
+          </div>
+        </div>
+        <!-- sz -->
+        <div class="esp-sz">
+          <h3 class=" ta-c td-u">聖諾里歐葡萄酒</h3>
+          <p class="ta-c js-sz-desc fs-18"></p>
+          <div class="sz-list js-sz-list">  
+            <div class="bg-sz-w"></div>
+            <div class="bg-sz-p"></div>
+            <div class="bg-sz-r"></div>
+          </div>
+        </div>
+        <div class="esp-sangria ta-c bg-sgr">
+          <h3 class="pt-120 mb-0 td-u">桑格莉亞水果紅酒</h3>
+          <p class="fs-18">西班牙 / 375ml, 750ml, 1L / alc. 11%</p>  
+          <p class="sgr-desc">
+            <span class="js-sgr-desc"></span>
+            <a href="http://lafiestatw.wix.com/lafiestataiwan">Read more</a>
           </p>
-          <p class="fs-14"> // 文理國際</p>
         </div>
-        <div class="brands">
-            <div class="esp-cava row fs-14">
-              <div class="cava-desc col-cd bg-cava ta-r">
-                <h3 class="fs-24"><span class="td-u">ALSINAC CAVA</span></h3>
-                <p class="js-cava-desc"></p>
-              </div>
-              <div class="cava-list col-cl js-cava-list">
-                <div class="bg-cava1"></div>
-                <div class="js-cava1">
-                  愛席娜氣泡酒 CAVA<br>
-                  西班牙 / 750ml / ... 
-                </div>
-                <div class="bg-cava2"></div>
-                <div class="js-cava2">
-                  愛席娜特級珍藏氣泡酒 CAVA<br>
-                  西班牙 / 750ml / ...
-                </div>
-                <div class="bg-cava3"></div>
-                <div class="js-cava3">
-                  愛席娜粉紅氣泡酒 CAVA<br> 
-                  西班牙 / 750ml / ...
-                </div>
-              </div>
-            </div>
-            <div class="esp-sz">
-              <h3 class="fs-24 ta-c td-u">聖諾里歐葡萄酒</h3>
-              <p class="ta-c js-sz-desc"></p>
-              <div class="sz-list">  
-                <div class="bg-sz-w"></div>
-                <div class="bg-sz-p"></div>
-                <div class="bg-sz-r"></div>
-              </div>
-            </div>
-            <div class="esp-sangria ta-c bg-sgr">
-              <h3 class="fs-24 pt-80 td-u">桑格莉亞水果紅酒</h3>
-              <p> 
-                  西班牙 / 375ml, 750ml, 1L / Alc. 11%
-              </p>  
-              <p class="sgr-desc js-sgr-desc"></p>
-            </div>
-            <div class="che"></div>
-            <div class="prt-cherry"></div>
-            <div class="esp-cider"></div>
+        
+        <!-- cider -->
+        <div class="esp-cider bg-m mb-0">
+          <!---div class="col-m">
+            <h3><span class="cider-h3">Cider</span></h3>
+            <p class="js-m-sw"></p>
+            <div class="bg-m-cider1">
+              Mayador 蘋果氣泡酒(全球限量版)<br>
+              風味香甜，清新可口。作為開胃酒或搭配各式餐點、乳酪、甜點與水果。</div>
+            <div class="bg-m-cider2"></div>
+            <div class="bg-m-cider3"></div>
+          </div> 
+          <div class="col-m">
+            <h3><span class="cider-h3">Wines</span></h3>
+            <p class="js-m-cider"></p>
+            <div class="bg-m-sw1"></div>
+            <div class="bg-m-sw2"></div>
+          </div>             
+          <div class="col-m">
+            <h3><span class="cider-h3">Juice</span></h3>
+            <p class="js-m-juice"></p>
+            <div class="bg-m-j1"></div>
+            <div class="bg-m-j2"></div>
+            <div class="bg-m-j3"></div>
+            <div class="bg-m-j4"></div>
+          </div--> 
         </div>
-        <!--div class="products z-100">
-        </div-->
-        <div class="contact z-100">
+
+        <div class="prt-cherry">
+          <div class="col-2 ta-r">
+            <h3 class="js-prt-name td-u"></h3>
+            <p class="fs-18">葡萄牙 / alc. 20%<br>
+              50ml, 500ml, 精裝 500ml, 700ml</p>
+            <p class="js-prt-desc"></p>
+            <p class="js-prt-text"></p>
+          </div
+          ><div class="col-2">
+            <img class="img-cherry" src="imgs/bg-cherry.jpg">
+          </div>
         </div>
+      </div>
+      <!--div class="products z-100">
+      </div-->
+      <div class="contact z-100">
+      </div>
     </body>
-</html>
+  </html>
