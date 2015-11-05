@@ -7,14 +7,26 @@ body {
 h3 {
   font-size: 24px;
 }
+@media (min-width: 740px) { 
+  h1 { font-size: 3rem; }
+  h2, h3 { font-size: 2rem; } 
+}
+
 /* atomic-liked css*/
 .z-100 {
   width: 100vw;
   height: 100vh;
 }
+.w-50 {
+  width: 50%;
+}
+
 .p-f { position: fixed; }
+.p-r { position: relative; }
+.p-a { position: absolute; }
 
 .mb-0   { margin-bottom: 0; }
+.mt-20  { margin-top: 20%; }
 .mt-30  { margin-top: 25vh; }
 .pt-120 { padding-top: 120px; }
 
@@ -25,6 +37,10 @@ h3 {
 .ta-c { text-align: center; }
 .td-u { text-decoration: underline; }
 
+.c-grey1 { color: #333; }
+.c-grey2 { color: #ccc; }
+.bg-w { background-color: rgba(245, 245, 220, 0.25); }
+.bg-r { background-color: rgba(250, 130, 120, 0.05); }
 
 /* custom css */
 .home {
@@ -39,22 +55,67 @@ h3 {
 }
 .brands {
   background-color: #fff;
-  border: 1px solid #fff;
-  padding-top: 30px;
   padding-bottom: 30px;
 }
-.brands > div {
-  margin-bottom: 30px;
-}
-.products {
+/*.products {
   background-color: #eee;
   border: 1px solid #eee; 
+}*/
+
+.che {
+  overflow: auto;
+  margin-bottom: 60px;
+}
+.che div {
+  float: left;
+  width: 100%;
+  height: 256px;
+}
+@media (min-width: 512px) { .che div { width: calc(100% / 2); }} 
+@media (min-width: 800px) { .che div { width: calc(100% / 3); }} 
+@media (min-width: 1080px) { .che div { width: calc(100% / 4); }} 
+[class*="bg-vs-"] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg-vs-2  { background-image: url("imgs/vs/che2.jpg"); }
+.bg-vs-8  { background-image: url("imgs/vs/che8.jpg"); }
+.bg-vs-5  { background: left url("imgs/vs/che5.jpg"); }
+.bg-vs-10 { background-image: url("imgs/vs/che10.jpg"); }
+.bg-vs-12 { background: left url("imgs/vs/che12.jpg"); }
+.bg-vs-16 { background-image: url("imgs/vs/che16.jpg"); }
+.bg-line {
+  width: 45px;
+  border-bottom: 1px solid #555;
+  margin: 0 auto;
+}
+.vs-cave,
+.vs-note {
+  margin: 0;
+  padding: 20px;
+}
+.vs-cave {
+  background-image: linear-gradient(0deg, rgba(0,0,0, 0), rgba(0,0,0, 0.5));
+}
+.vs-note {
+  bottom: 0;
+  background-image: linear-gradient(190deg, rgba(0,0,0, 0), rgba(0,0,0, 0.75));
+}
+.js-vs {
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+.js-vs .name {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .esp-cava {
   width: calc(100% - 60px);
   //min-height: 50vh;
-  margin-top: 15px;
+  margin: 60px auto;
 }
 .esp-sz {
   background-color: #f8f8fa;
@@ -89,7 +150,8 @@ h3 {
 .row { 
   max-width: 1024px;
   overflow: auto;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 .col-cd,
 .col-cl {
@@ -104,11 +166,14 @@ h3 {
   float: left;
   text-align: center;
 }
-@media (min-width: 960px) { .col-cd { width: 50%; } }
-@media (min-width: 960px) { .col-cl { width: 50%; } }
-@media (min-width: 740px) and (max-width: 959px) { .col-cd { width: 33.34%; } }
-@media (min-width: 740px) and (max-width: 959px) { .col-cl { width: 66.33%; } }
 @media (min-width: 480px) { .col-cl div { width: 50%; text-align: left; } }
+@media (min-width: 740px) { 
+  .col-cd { width: 40%; } 
+  .col-cl { width: 60%; margin-top: 15px; } 
+}
+@media (min-width: 960px) { 
+  .col-cd { width: 50%; } 
+  .col-cl { width: 50%; } }
 /* end of cava */
 
 /* sz table wines */
@@ -124,7 +189,7 @@ h3 {
   padding-left: 85px;
   box-sizing: border-box; 
 }
-@media (min-width: 480px) and (max-width: 739px) { .sz-list div { width: 50%; float: left; }}
+@media (min-width: 480px) { .sz-list div { width: 50%; float: left; }}
 @media (min-width: 740px) { .sz-list div { width: 33%; float: left; } }
 
 [class*="bg-sz-"] {
@@ -200,8 +265,8 @@ h3 {
   width: 100%;
   box-sizing: border-box;
 }
+@media (min-width: 480px) { .col-m { width: calc(100% / 2); } }
 @media (min-width: 740px) { .col-m { width: calc(100% / 3); } }
-@media (max-width: 739px) and (min-width: 480px) { .col-m { width: calc(100% / 2); } }
 
 .col-m div {
   font-size: 14px;
@@ -232,6 +297,9 @@ h3 {
 
 
 .contact {
-  height: 100px;
-  background-color: #333;
+  color: white;
+  font-family: sans-serif;
+  background-color: #222;
+  height: 60px;
+  padding-top: 30px;
 }

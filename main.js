@@ -15,7 +15,9 @@
                     alc : d.gsx$alc.$t,
                     org : d.gsx$origin.$t,
                     desc: d.gsx$desc.$t,
-                    list: d.gsx$details.$t
+                    list: d.gsx$details.$t,
+                    temp: d.gsx$temp.$t,
+                    year: d.gsx$year.$t
                 };
                 return datum;
             });
@@ -33,7 +35,7 @@
         // sz table wines
         var szList = list.filter(function(d) { return d.id.indexOf("sz") !== -1; });
         var szDesc = document.querySelector(".js-sz-desc");
-        szDesc.textContent = list[4].desc;
+        szDesc.textContent = szList[0].desc;
         d3.selectAll(".js-sz-list div").data(szList)
         .html(function(d) { return d.name + "<br>" + d.org + " / " + d.size + " / alc. " + d.alc + "<br>" + d.list; });
         
@@ -45,8 +47,20 @@
         var prtData = list.filter(function(d) { return d.id.indexOf("cherry") !== -1; }),
             prtKeys = ["name", "desc", "list"],
             prtEls  = [".js-prt-name", ".js-prt-desc", ".js-prt-text"];
-        console.log(prtData[0], prtKeys);
         addText(prtEls, prtKeys, prtData[0]);
+        
+        // mayador 
+        var mData = list.filter(function(d) { return d.id.indexOf("m-") !== -1; });
+        document.querySelector(".js-m-desc").textContent = mData[0].desc;  
+        
+        // vs/swiss wines
+        var vsData = list.filter(function(d) { return d.id.indexOf("vs-") !== -1; });
+        d3.selectAll(".js-vs").data(vsData).html(function(d) { 
+          return '<span class="name">' + d.name + "</span><br>" + d.org + "<br>" + 
+             d.size + " / " + "alc. " + d.alc + "% / " + d.desc + "<br>" + 
+             "適飲：" + d.temp + " / " + d.year + "<br>" +
+             "...";//d.list; 
+        });
     });
 
     function addText(els, keys, data) {
