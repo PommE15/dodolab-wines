@@ -3,26 +3,40 @@
 
     var key = "1aCp4Ye2NoDgI2Qd_TwieXU9uvzU1tdZngsoRcg3Werg", 
         url = "https://spreadsheets.google.com/feeds/list/"+key+"/od6/public/values?alt=json";
+    //url = "data.csv";
     
     d3.json(url, function(err, sheet){
+    //d3.csv(url, function(err, csv){
         var data = sheet.feed.entry,
             list = data.map(function(d){
+            //list = csv.map(function(d){
                 var datum = {
-                    id: d.gsx$id.$t,
+                    id  : d.gsx$id.$t,
                     cave: d.gsx$cave.$t,
                     name: d.gsx$name.$t,
                     size: d.gsx$size.$t,
                     alc : d.gsx$alc.$t,
                     org : d.gsx$origin.$t,
                     desc: d.gsx$desc.$t,
-                    list: d.gsx$details.$t,
+                    info: d.gsx$details.$t,
                     temp: d.gsx$temp.$t,
                     year: d.gsx$year.$t
+                    /*
+                    id  : d.id,//d.gsx$id.$t,
+                    cave: d.cave,//d.gsx$cave.$t,
+                    name: d.name,//d.gsx$name.$t,
+                    size: d.size,//d.gsx$size.$t,
+                    alc : d.alc,//d.gsx$alc.$t,
+                    org : d.origin,//d.gsx$origin.$t,
+                    desc: d.desc,//d.gsx$desc.$t,
+                    info: d.details,//d.gsx$details.$t,
+                    temp: d.temp,//d.gsx$temp.$t,
+                    year: d.year//d.gsx$year.$t
+                    */
                 };
                 return datum;
             });
-
-        console.log(list); 
+        //console.log(list); 
         
         //TODO: load data to the page
         // cava
@@ -37,36 +51,56 @@
         var szDesc = document.querySelector(".js-sz-desc");
         szDesc.textContent = szList[0].desc;
         d3.selectAll(".js-sz-list div").data(szList)
-        .html(function(d) { return d.name + "<br>" + d.org + " / " + d.size + " / alc. " + d.alc + "<br>" + d.list; });
-        
+        .html(function(d) { return item(d); });
+
         // sangria 
         var sangriaDesc = document.querySelector(".js-sgr-desc");
-        sangriaDesc.textContent = list[0].desc + list[0].list;
+        sangriaDesc.textContent = list[0].desc + list[0].info;
               
         // cherry
         var prtData = list.filter(function(d) { return d.id.indexOf("cherry") !== -1; }),
-            prtKeys = ["name", "desc", "list"],
-            prtEls  = [".js-prt-name", ".js-prt-desc", ".js-prt-text"];
-        addText(prtEls, prtKeys, prtData[0]);
+            prtKeys = ["name", "desc", "info"];
+        addTexts(prtKeys, prtData[0]);
         
         // mayador 
-        var mData = list.filter(function(d) { return d.id.indexOf("m-") !== -1; });
-        document.querySelector(".js-m-desc").textContent = mData[0].desc;  
-        
+        var ciderData = filterData(list, "m-c"),
+            bustoData = filterData(list, "m-w");
+        document.querySelector(".js-m-desc").textContent = ciderData[0].desc;  
+        addItems("m-c", ciderData);
+        addItems("m-b", bustoData);
+
         // vs/swiss wines
         var vsData = list.filter(function(d) { return d.id.indexOf("vs-") !== -1; });
         d3.selectAll(".js-vs").data(vsData).html(function(d) { 
           return '<span class="name">' + d.name + "</span><br>" + d.org + "<br>" + 
              d.size + " / " + "alc. " + d.alc + "% / " + d.desc + "<br>" + 
              "適飲：" + d.temp + " / " + d.year + "<br>" +
-             "...";//d.list; 
+             "...";//d.info; 
         });
     });
+    
+    function item(d) {
+        return "<h4 class='item-name'>" + d.name + "</h4>" + 
+            "<span class='fs-i'>" + d.org + " / " + d.size + " / alc. " + d.alc +
+            "</span><p class='item-info'>" + d.info + "</p>";
+    }
+    function filterData(data, str) {
+        return data.filter(function(d) { return d.id.indexOf(str) !== -1; });
+    }
 
-    function addText(els, keys, data) {
-      els.forEach(function(d, i) {
-        document.querySelector(d).textContent = data[keys[i]];      
+    function addTexts(keys, data) {
+      keys.forEach(function(d, i) {
+        var k = keys[i];
+        document.querySelector(".js-prt-" + k).textContent = data[k];      
       });
+    }
+    function addItems(key, data) {
+        d3.select(".js-" + key)
+        .selectAll("div").data(data).enter()
+        .append("div").attr("class", function(d, i) { return "item bg-" + key+(i+1);} )
+        .html(function(d) { 
+            return item(d); 
+        });
     }
 
 })();
