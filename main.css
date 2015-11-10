@@ -258,7 +258,7 @@ border: 1px solid #eee;
         url("imgs/cherry-deco.png");
     background-repeat: no-repeat;
     background-position: center 90%, top right, top left;
-    background-size: 256px auto, 32px auto, 30% auto;
+    background-size: 256px auto, 48px auto, 30% auto;
     padding-bottom: 200px;
 }
 @media (min-width: 740px) {
