@@ -11,6 +11,7 @@
             list = data.map(function(d){
             //list = csv.map(function(d){
                 var datum = {
+                    
                     id  : d.gsx$id.$t,
                     cave: d.gsx$cave.$t,
                     name: d.gsx$name.$t,
@@ -64,7 +65,7 @@
         
         // mayador 
         var ciderData = filterData(list, "m-c"),
-            bustoData = filterData(list, "m-w");
+            bustoData = filterData(list, "m-b");
         document.querySelector(".js-m-desc").textContent = ciderData[0].desc;  
         addItems("m-c", ciderData);
         addItems("m-b", bustoData);
@@ -72,10 +73,11 @@
         // vs/swiss wines
         var vsData = list.filter(function(d) { return d.id.indexOf("vs-") !== -1; });
         d3.selectAll(".js-vs").data(vsData).html(function(d) { 
-          return '<span class="name">' + d.name + "</span><br>" + d.org + "<br>" + 
-             d.size + " / " + "alc. " + d.alc + "% / " + d.desc + "<br>" + 
-             "適飲：" + d.temp + " / " + d.year + "<br>" +
-             "...";//d.info; 
+          return ""; 
+            //'<span class="name">' + d.name + "</span><br>" + d.org + "<br>" + 
+            //d.size + " / " + "alc. " + d.alc + "% / " + d.desc + "<br>" + 
+            //"適飲：" + d.temp + " / " + d.year + "<br>" +
+            //"...";//d.info; 
         });
     });
     
