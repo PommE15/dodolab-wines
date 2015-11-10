@@ -97,9 +97,12 @@ border: 1px solid #eee;
     background-image: linear-gradient(190deg, rgba(0,0,0, 0), rgba(0,0,0, 0.75));
 }
 .js-vs {
-    padding: 60px 20px;
+    padding: 30px 20px;
     box-sizing: border-box;
-    max-width: 300px;
+}
+.js-vs div {
+    max-width: 450px;
+    margin: auto;
 }
 .js-vs .name {
     font-size: 16px;
