@@ -99,6 +99,7 @@ border: 1px solid #eee;
 .js-vs {
     padding: 60px 20px;
     box-sizing: border-box;
+    max-width: 300px;
 }
 .js-vs .name {
     font-size: 16px;
