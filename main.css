@@ -3,19 +3,29 @@ body {
     margin: 0;
     line-height: 1.5;
     font-size: 14px;
+    font-family: "Times New Roman", "FangSong", "仿宋", STFangSong, "華文仿宋", serif;
 }
+
 h2 {
+    color: #333;
     padding: 0 15px;
+    font-size: 1em;
 }
 h3 {
     font-size: 24px;
 }
-
 @media (min-width: 740px) { 
     h1 { font-size: 3rem; }
     h2, h3 { font-size: 1.4rem; } 
 }
-a { color: crimson; }
+
+a { 
+    color: dimgrey;
+    font-style: italic; 
+}
+a:hover {
+    color: black;
+}
 
 /* atomic-liked css*/
 .z-100 {
@@ -23,6 +33,7 @@ a { color: crimson; }
     height: 100vh;
 }
 .w-50   { width: 50%; }
+.mw-450 { max-width: 450px; }
 
 .p-f { position: fixed; }
 .p-r { position: relative; }
@@ -30,11 +41,14 @@ a { color: crimson; }
 
 .m-auto { margin: auto; }
 .mb-0   { margin-bottom: 0; }
+.mt-0   { margin-top: 0; }
+.mt-10  { margin-top: 10vh; }
 .mt-20  { margin-top: 20%; }
-.mt-15  { margin-top: 15vh; }
-.pt-120 { padding-top: 120px; }
+.mt-30  { margin-top: 30px; }
+.pt-80  { padding-top: 80px; }
 
 .ff-ss { font-family: sans-serif; }
+.fz-16 { font-size: 16px; }
 .fz-18 { font-size: 18px; }
 .fs-i { font-style: italic; }
 .ta-r { text-align: right; }
@@ -45,6 +59,8 @@ a { color: crimson; }
 .c-grey2 { color: #ccc; }
 .bg-w { background-color: rgba(245, 245, 220, 0.25); }
 .bg-r { background-color: rgba(250, 130, 120, 0.05); }
+
+.d-n { display: none; }
 
 /* custom css */
 .home {
@@ -57,6 +73,13 @@ a { color: crimson; }
     background-size: cover;
     border: 1px solid rgba(100, 100, 100, 0.25);
 }
+.f-mini {
+    color: #666;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 0 6px;
+}
+
 .brands {
     background-color: #fff;
 }
@@ -70,20 +93,18 @@ border: 1px solid #eee;
     margin-bottom: 60px;
 }
 .bg-che {
-    background-image: url("imgs/vs/che0.jpg");
-    background-size: 100% auto;/*cover;*/
-    background-repeat: no-repeat;
-    /*padding: 30px 60px;*/
+    background: right -10px no-repeat url("imgs/vs/che18.jpg"), 
+    0 50% no-repeat url("imgs/vs/che0.jpg");
+    background-size: 480px auto, 100% auto;/*cover;*/
 }
 .che-desc {
     max-width: 600px;
-    margin: auto;
-    padding: 0 15px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .che-list {
     max-width: 600px;
     width: 100%;
-    margin-top: 30px;
 }
 [class*="bg-vs"] {
     float: left;
@@ -103,10 +124,21 @@ border: 1px solid #eee;
 .bg-vs-16 { background-image: url("imgs/vs/che16.jpg"); }
 .bg-line {
     width: 45px;
-    border-bottom: 1px solid #555;
-    margin: 0 auto;
+    border-bottom: 1px solid grey;
+    margin: 15px auto;
 }
-.vs-cave,
+.bg-line-left {
+    width: 45px;
+    border-bottom: 1px solid grey;
+    margin: 15px 0;
+}
+.bg-line-right {
+    width: 45px;
+    border-bottom: 1px solid grey;
+    margin: 15px 0 15px auto;
+}
+
+    .vs-cave,
 .vs-note {
     margin: 0;
     padding: 20px;
@@ -138,8 +170,8 @@ border: 1px solid #eee;
 }
 .esp-sz {
     background-color: #f8f8fa;
-    padding-top: 5px;
-    padding-bottom: 45px;
+    padding-top: 20px;
+    padding-bottom: 30px;
 }
 
 /* cava */
@@ -221,26 +253,28 @@ border: 1px solid #eee;
 
 .esp-sangria {
     min-height: 100vh;
+    box-sizing: border-box;
+    border-bottom: 1px solid #222;
     margin-bottom: 0 !important;
+    padding: 30px 0;
 }
 .bg-sgr {
-    background: top no-repeat url("imgs/bg-sgr-logo.jpg"),
-    bottom no-repeat url("imgs/bg-sgr-red.png");
-    background-size: 210px auto, 100% 68%;
+    background: center 30px no-repeat url("imgs/bg-sgr-logo.jpg"),
+    center bottom no-repeat url("imgs/bg-sgr-logo.png"),
+    0 250px no-repeat url("imgs/bg-sgr-mask.png"),
+    center 200px no-repeat url("imgs/bg-sgr-red3.jpg");
+    background-size: 210px auto, 64px auto, cover, cover;
 }
 .sgr-desc {
     color: white;
-    font-family: sans-serif;
     line-height: 1.5;
-    //background: rgba(32, 0, 0, 0.5);
     width: 80%;
     max-width: 600px;
-    margin: 20vh auto 0 auto;
+    margin: 12vh auto 0 auto;
     padding: 15px;
 }
 .sgr-desc a {
     color: white;
-    font-style: italic;
 }
 
 .esp-cider {
@@ -279,13 +313,14 @@ border: 1px solid #eee;
         url("imgs/cherry-itqi.png"), 
         url("imgs/cherry-deco.png");
     background-repeat: no-repeat;
-    background-position: center 90%, top right, top left;
-    background-size: 256px auto, 48px auto, 30% auto;
-    padding-bottom: 200px;
+    background-position: center 95%, 95% -3px, top left;
+    background-size: 300px auto, 48px auto, 30% auto;
+    padding-bottom: 220px;
 }
 @media (min-width: 740px) {
     .bg-cherry{ 
-        background-position: 90% 60%, top center, top left;
+        background-position: 95% 65%, 360px -4px, top left;
+        background-size: 300px auto, 58px auto, 30% auto;
         padding-bottom: 2%;
 }}
 
@@ -318,7 +353,16 @@ border: 1px solid #eee;
 .contact {
     color: white;
     font-family: sans-serif;
+    font-style: normal;
     background-color: #222;
-    padding-top: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     overflow: auto;
+}
+
+.btn-fb {
+    opacity: 0.5;    
+}
+.btn-fb:hover {
+    opacity: 1;
 }
