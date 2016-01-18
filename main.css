@@ -46,6 +46,7 @@ a:hover {
 .mt-20  { margin-top: 20%; }
 .mt-30  { margin-top: 30px; }
 .pt-80  { padding-top: 80px; }
+.ph-15  { padding-left: 15px; padding-right: 15px; }
 
 .ff-ss { font-family: sans-serif; }
 .fz-16 { font-size: 16px; }
@@ -54,6 +55,7 @@ a:hover {
 .ta-r { text-align: right; }
 .ta-c { text-align: center; }
 .td-u { text-decoration: underline; }
+.ws-nw { white-space: nowrap; }
 
 .c-grey1 { color: #333; }
 .c-grey2 { color: #ccc; }
@@ -91,16 +93,29 @@ border: 1px solid #eee;
 .che {
     overflow: auto;
     margin-bottom: 60px;
+    padding-top: 20px;
 }
+.che .item-info {
+    margin-top: 12px;
+    margin-bottom: 18px;
+}
+
 .bg-che {
-    background: right -10px no-repeat url("imgs/vs/che18.jpg"), 
+    background: 15% top no-repeat url("imgs/vs/flag-ch.jpg"), 
+    right -10px no-repeat url("imgs/vs/che18.jpg"), 
     0 50% no-repeat url("imgs/vs/che0.jpg");
-    background-size: 480px auto, 100% auto;/*cover;*/
+    background-size: auto 64px, 480px auto, 100% auto;/*cover;*/
 }
+.che-img {
+    max-width: 1000px;
+    width: 90%;
+}
+
 .che-desc {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 20px;
 }
 .che-list {
     max-width: 600px;
@@ -260,9 +275,9 @@ border: 1px solid #eee;
 }
 .bg-sgr {
     background: center 30px no-repeat url("imgs/bg-sgr-logo.jpg"),
-    center bottom no-repeat url("imgs/bg-sgr-logo.png"),
+    right bottom no-repeat url("imgs/bg-sgr-logo2.png"),
     0 250px no-repeat url("imgs/bg-sgr-mask.png"),
-    center 200px no-repeat url("imgs/bg-sgr-red3.jpg");
+    center 180px no-repeat url("imgs/bg-sgr-red3.jpg");
     background-size: 210px auto, 64px auto, cover, cover;
 }
 .sgr-desc {
@@ -271,7 +286,6 @@ border: 1px solid #eee;
     width: 80%;
     max-width: 600px;
     margin: 12vh auto 0 auto;
-    padding: 15px;
 }
 .sgr-desc a {
     color: white;
@@ -313,13 +327,13 @@ border: 1px solid #eee;
         url("imgs/cherry-itqi.png"), 
         url("imgs/cherry-deco.png");
     background-repeat: no-repeat;
-    background-position: center 95%, 95% -3px, top left;
+    background-position: center 95%, 97% -3px, top left;
     background-size: 300px auto, 48px auto, 30% auto;
     padding-bottom: 220px;
 }
 @media (min-width: 740px) {
     .bg-cherry{ 
-        background-position: 95% 65%, 360px -4px, top left;
+        background-position: 95% 65%, 40% -4px, top left;
         background-size: 300px auto, 58px auto, 30% auto;
         padding-bottom: 2%;
 }}
