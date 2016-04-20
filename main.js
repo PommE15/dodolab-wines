@@ -65,10 +65,12 @@
         
         // mayador 
         var ciderData = filterData(list, "m-c"),
-            bustoData = filterData(list, "m-b");
+            bustoData = filterData(list, "m-b"),
+            maymgData = filterData(list, "m-m");
         document.querySelector(".js-m-desc").textContent = ciderData[0].desc;  
         addItems("m-c", ciderData);
         addItems("m-b", bustoData);
+        addItems("m-m", maymgData);
 
         // vs/swiss wines
         var vsData = list.filter(function(d) { return d.id.indexOf("vs-") !== -1; });
@@ -77,18 +79,9 @@
         .append("div")
         .html(function(d) { 
           return item(d); 
-            //'<span class="name">' + d.name + "</span><br>" + d.org + "<br>" + 
-            //d.size + " / " + "alc. " + d.alc + "% / " + d.desc + "<br>" + 
-            //"適飲：" + d.temp + " / " + d.year + "<br>" +
-            //"...";//d.info; 
-        });
+       });
     });
     
-    function item(d) {
-        return "<h4 class='item-name'>" + d.name + "</h4>" + 
-            "<span class='fs-i'>" + d.org + " / " + d.size + " / alc. " + d.alc +
-            "</span><p class='item-info'>" + d.info + "</p>";
-    }
     function filterData(data, str) {
         return data.filter(function(d) { return d.id.indexOf(str) !== -1; });
     }
@@ -99,13 +92,28 @@
         document.querySelector(".js-prt-" + k).textContent = data[k];      
       });
     }
+
+    function item(d) {
+        return ( 
+            "<h4 class='item-name'>" + d.name + "</h4>" + 
+            "<span class='fs-i'>" + d.org + " / " + d.size + " / 酒精 " + d.alc +
+            "</span><p class='item-info'>" + d.info + "</p>"
+        );
+    }
     function addItems(key, data) {
-        d3.select(".js-" + key)
-        .selectAll("div").data(data).enter()
-        .append("div").attr("class", function(d, i) { return "item bg-" + key+(i+1);} )
-        .html(function(d) { 
-            return item(d); 
-        });
+        var items = d3.select(".js-" + key)
+        .selectAll("div")
+        .data(data).enter()
+        .append("div") .attr("class", "item");
+        
+        items
+        .append("div") .attr("class", "item-txt")
+        .html(function(d) { return item(d); });
+
+        items
+        .append("div") .attr("class", "item-img")
+        .append("img")
+        .attr("src", function(d, i) { return "imgs/" + key+(i+1) + ".png";} );
     }
 
 })();

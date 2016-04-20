@@ -2,7 +2,7 @@
 body {
     margin: 0;
     line-height: 1.5;
-    font-size: 14px;
+    font-size: 15px;
     font-family: "Times New Roman", "FangSong", "仿宋", STFangSong, "華文仿宋", serif;
 }
 
@@ -44,7 +44,7 @@ a:hover {
 .mt-0   { margin-top: 0; }
 .mt-10  { margin-top: 10vh; }
 .mt-20  { margin-top: 20%; }
-.mt-30  { margin-top: 30px; }
+.mt-30  { margin-top: 30px !important; }
 .pt-80  { padding-top: 80px; }
 .ph-15  { padding-left: 15px; padding-right: 15px; }
 
@@ -296,27 +296,25 @@ border: 1px solid #eee;
     min-height: 100vh;
     overflow: auto;
 }
-.esp-cider .item-info { width: calc(100% - 60px); max-width: 330px; }
+.esp-cider .item { min-width: 320px; max-width: 480px; min-height: 138px; }
+.esp-cider .item-txt { display: inline-block; width: calc(100% - 138px); }
+.esp-cider .item-img { display: inline-block; width: 128px; height: 128px; padding-left: 10px; vertical-align: top; }
+.esp-cider .item-info { max-width: 360px; }
+.esp-cider .item-img img { height: 128px; display: block; margin: auto; 
+  filter: drop-shadow(0px -0px 4px rgba(15,15,15,0.5)); 
+  -webkit-filter: drop-shadow(0px -0px 4px rgba(15,15,15,0.5)); 
+}
 
 .bg-m {
     background: right bottom no-repeat url("imgs/m.jpg");
     background-size: contain;
     background-color: rgb(15, 10, 15);
 }
-[class*="bg-m-"] {
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    background-size: auto 128px;
-}
-@media (min-width: 480px)  { [class*="bg-m-"]{ background-position: 358px; }}
-@media (min-width: 740px)  { [class*="bg-m-"]{ background-position: right; }}
-@media (min-width: 1024px) { [class*="bg-m-"]{ background-position: 358px; }}
 
-.bg-m-c1{ background-image: url("imgs/m-c1.png"); }
-.bg-m-c2{ background-image: url("imgs/m-c2.png"); }
-.bg-m-c3{ background-image: url("imgs/m-c3.png"); }
-.bg-m-b1{ background-image: url("imgs/m-b1.png"); }
-.bg-m-b2{ background-image: url("imgs/m-b2.png"); }
+@media (max-width: 480px)  { 
+    /*.esp-cider .item-txt { width: calc(100% - 64px); }*/
+    /*[class*="bg-m-"]{ background-position: 358px; }*/
+}
 
 .prt-cherry {
     overflow: auto;
