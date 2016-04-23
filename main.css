@@ -43,6 +43,7 @@ a:hover {
 .mb-0   { margin-bottom: 0; }
 .mt-0   { margin-top: 0; }
 .mt-10  { margin-top: 10vh; }
+.mt-15  { margin-top: 15px; }
 .mt-20  { margin-top: 20%; }
 .mt-30  { margin-top: 30px !important; }
 .pt-80  { padding-top: 80px; }
@@ -68,18 +69,31 @@ a:hover {
 .home {
     color: #000;
     text-align: center;
-    height: 75vh;
-    background-image: url("imgs/bg7.jpg");
+    height: 90vh;
+    min-height: 580px; /*568px; iphone5*/
+    background-image: url("imgs/bg7_m.jpg");
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
     border: 1px solid rgba(100, 100, 100, 0.25);
 }
+@media (max-width: 620px) { 
+.home {
+    background-image: url("imgs/bg7_s.jpg");
+}}
 .f-mini {
     color: #666;
     font-weight: bold;
     font-size: 12px;
     padding: 0 6px;
+}
+.f-news {
+    color: white;
+    background-color: rgba(40,20,60, 0.8);
+    padding: 3px 9px;
+    display: inline-block;
+    margin-bottom: 1px;
+    padding: 3px 9px;
 }
 
 .brands {
