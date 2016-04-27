@@ -104,6 +104,7 @@ background-color: #eee;
 border: 1px solid #eee; 
 }*/
 
+/* swiss */
 .che {
     overflow: auto;
     margin-bottom: 60px;
@@ -114,10 +115,49 @@ border: 1px solid #eee;
     margin-bottom: 18px;
 }
 
+.row-che {
+    color: white;
+    width: 90%;
+    margin-left: 5%;
+    display: table;
+}
+.col-l { 
+    width: 45%;
+    display: table-cell; 
+    vertical-align: bottom;
+    position: relative;
+}
+.col-r { 
+    width: 45%;
+    display: table-cell; 
+    text-align: left;
+    background: top center no-repeat url("imgs/vs/bg-cave.jpg");
+    background-size: cover;
+}
+@media (max-width: 800px) { 
+    .row-che { display: block; }
+    .col-l { display: block; width: 90%; min-height: 300px; }
+    .col-r { display: block; width: 90%; }
+}
+
+.che-img-vs18 {
+    width: 60%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.che-img-logo {
+    height: 45%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .bg-che {
-    background: 15% top no-repeat url("imgs/vs/flag-ch.jpg"), 
-    right -10px no-repeat url("imgs/vs/che18.jpg"), 
-    0 50% no-repeat url("imgs/vs/che0.jpg");
+    background: 
+        15% top no-repeat url("imgs/vs/flag-ch.jpg"), 
+        right -10px no-repeat url("imgs/vs/che18.jpg"), 
+        0 50% no-repeat url("imgs/vs/che0.jpg");
     background-size: auto 64px, 480px auto, 100% auto;/*cover;*/
 }
 .che-img {
@@ -129,7 +169,7 @@ border: 1px solid #eee;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 20px;
+    padding: 20px;
 }
 .che-list {
     max-width: 600px;
@@ -167,7 +207,7 @@ border: 1px solid #eee;
     margin: 15px 0 15px auto;
 }
 
-    .vs-cave,
+.vs-cave,
 .vs-note {
     margin: 0;
     padding: 20px;
