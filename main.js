@@ -115,5 +115,13 @@
         .append("img")
         .attr("src", function(d, i) { return "imgs/" + key+(i+1) + ".png";} );
     }
-
+    
+    /*function addItem(d) {
+        var item = d3.append("div")
+        .attr("class", "row-che");
+        
+        item
+        .append("div")
+        .attr("class", "col-3");
+    }*/
 })();
