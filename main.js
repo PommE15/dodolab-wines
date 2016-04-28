@@ -77,8 +77,9 @@
         d3.select(".js-vs")
         .selectAll("div").data(vsData).enter()
         .append("div")
-        .html(function(d) { 
-          return item(d); 
+        .attr("class", "col-3")
+        .html(function(d, i) { 
+          return addItem(d, i); 
        });
     });
     
@@ -116,12 +117,11 @@
         .attr("src", function(d, i) { return "imgs/" + key+(i+1) + ".png";} );
     }
     
-    /*function addItem(d) {
-        var item = d3.append("div")
-        .attr("class", "row-che");
-        
-        item
-        .append("div")
-        .attr("class", "col-3");
-    }*/
+    function addItem(d, i) {
+        return (
+            '<div class="col-3-top"><img src="imgs/vs/' + 
+            d.id + '.jpg"></div>' +
+            '<div class="col-3-bottom">' + item(d) + '</div>'
+        );
+    }
 })();

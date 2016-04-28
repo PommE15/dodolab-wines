@@ -113,7 +113,7 @@ border: 1px solid #eee;
 /* swiss */
 .che {
     overflow: auto;
-    margin-bottom: 60px;
+    /*margin-bottom: 60px;*/
     padding-top: 20px;
 }
 .che .item-info {
@@ -206,6 +206,29 @@ border: 1px solid #eee;
     border-bottom: 1px solid grey;
     margin: 15px auto;
 }
+
+.col-3 {
+    width: 25%;
+    min-width: 285px;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    margin: 15px;
+}
+.col-3-bottom {
+    background-color: rgba(240, 240, 240, 0.5);
+    padding: 20px 10px 10px;
+}
+.col-3-top img {
+    width: 100%;
+    height: auto;
+    margin-bottom: -10px
+}
+
+@media (max-width: 620px) { 
+.col-3 { width: 60%; } 
+}
+    
 .bg-line-left {
     width: 45px;
     border-bottom: 1px solid grey;
@@ -229,14 +252,7 @@ border: 1px solid #eee;
     bottom: 0;
     background-image: linear-gradient(190deg, rgba(0,0,0, 0), rgba(0,0,0, 0.75));
 }
-.js-vs {
-    padding: 30px 20px;
-    box-sizing: border-box;
-}
-.js-vs div {
-    max-width: 450px;
-    margin: auto;
-}
+
 .js-vs .name {
     font-size: 16px;
     font-weight: bold;
@@ -260,22 +276,6 @@ border: 1px solid #eee;
     padding-right: 15px;
     padding-left: 15px;
 }
-.bg-cava {
-    color: #fff;
-    background-image: url("imgs/bg-cava.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
-[class*="bg-cava-"] {
-    background-size: 200px auto;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.bg-cava-1 { background-image: url("imgs/bg-cava-1.png"); }
-.bg-cava-2 { background-image: url("imgs/bg-cava-2.png"); }
-.bg-cava-3 { background-image: url("imgs/bg-cava-3.png"); }
-
 .row { 
     max-width: 1024px;
     overflow: auto;
@@ -295,7 +295,10 @@ border: 1px solid #eee;
     float: left;
     text-align: center;
 }
-@media (min-width: 480px) { .col-cl div { width: 50%; text-align: left; } }
+@media (min-width: 480px) { 
+    .col-cl div { width: 50%; text-align: left; } 
+    .js-cl { padding-top: 12px; }
+}
 @media (min-width: 740px) { 
     .col-cd { width: 40%; } 
     .col-cl { width: 60%; margin-top: 15px; } 
@@ -304,6 +307,23 @@ border: 1px solid #eee;
     .col-cd { width: 50%; } 
     .col-cl { width: 50%; margin-top: 0; } 
 }
+.bg-cava {
+    color: #fff;
+    min-height: 256px;
+    background-image: url("imgs/bg-cava.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+[class*="bg-cava-"] {
+    background-size: 200px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bg-cava-1 { background-image: url("imgs/bg-cava-1.png"); }
+.bg-cava-2 { background-image: url("imgs/bg-cava-2.png"); min-height: 82px !important;}
+.bg-cava-3 { background-image: url("imgs/bg-cava-3.png"); }
+.cava-2 { min-height: 82px !important;}
 /* end of cava */
 
 /* sz table wines */
@@ -380,6 +400,12 @@ border: 1px solid #eee;
 
 .prt-cherry {
     overflow: auto;
+    position: relative;
+}
+.prt-awards {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .bg-cherry {
     background: 
@@ -393,7 +419,7 @@ border: 1px solid #eee;
 }
 @media (min-width: 740px) {
     .bg-cherry{ 
-        background-position: 95% 65%, 40% -4px, top left;
+        background-position: 95% 65%, 45% -3px, top left;
         background-size: 300px auto, 58px auto, 30% auto;
         padding-bottom: 2%;
 }}
@@ -405,15 +431,11 @@ border: 1px solid #eee;
     float: left;
     overflow: hidden;
 }
-.col-2-left {
-    padding: 2% 3% 2% 6%;
-}
-.col-2-right {
-    padding: 2% 6% 2% 3%;
-}
 @media (min-width: 740px) { 
-    .col-2 { width: calc(100% / 2); } 
     .w-cl  { width: calc(100% - 300px); } 
+    .col-2 { width: calc(100% / 2); } 
+    .col-2-left { padding: 2% 3% 2% 6%; }
+    .col-2-right { padding: 2% 6% 2% 3%; }
 }
 
 
