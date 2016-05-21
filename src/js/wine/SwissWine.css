@@ -1,0 +1,33 @@
+.col-3 {
+    width: 25%;
+    min-width: 285px;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    margin: 15px;
+}
+.col-3-bottom {
+    background-color: rgba(240, 240, 240, 0.5);
+    padding: 20px 10px 10px;
+}
+.col-3-top img {
+    width: 100%;
+    height: auto;
+    margin-bottom: -10px
+}
+
+@media (max-width: 620px) {
+.col-3 { width: 60%; }
+}
+
+.item {
+    min-height: 128px;
+}
+.item-name {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.fs-i { font-style: italic; }
