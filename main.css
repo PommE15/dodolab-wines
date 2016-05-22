@@ -47,7 +47,7 @@ h3 {
 .m-auto { margin: auto; }
 .mb-0   { margin-bottom: 0; }
 .mt-0   { margin-top: 0; }
-.mt-10  { margin-top: 10vh; }
+.mt-10  { margin-top: 6vh; }
 .mt-15  { margin-top: 15px; }
 .mt-20  { margin-top: 20%; }
 .mt-30  { margin-top: 30px !important; }
@@ -116,8 +116,8 @@ border: 1px solid #eee;
     /*margin-bottom: 60px;*/
     padding-top: 20px;
 }
-.che .item-info {
-    margin-top: 12px;
+.item-detail {
+    margin-top: 8px;
     margin-bottom: 18px;
 }
 
@@ -271,10 +271,10 @@ border: 1px solid #eee;
 
 /* cava */
 .cava-desc {
-    min-height: 200px;
+    color: #fff;
+    line-height: 1.75;
     margin-bottom: 15px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding: 0 30px;
 }
 .row { 
     max-width: 1024px;
@@ -290,26 +290,25 @@ border: 1px solid #eee;
 }
 .col-cl div {
     width: 100%;
-    min-height: 64px;
+    min-height: 80px;
     border-top: 3px solid white;
     float: left;
     text-align: center;
 }
 @media (min-width: 480px) { 
     .col-cl div { width: 50%; text-align: left; } 
-    .js-cl { padding-top: 12px; }
+    .js-cl { padding-top: 2px; }
 }
 @media (min-width: 740px) { 
     .col-cd { width: 40%; } 
-    .col-cl { width: 60%; margin-top: 15px; } 
+    .col-cl { width: 60%; } 
 }
 @media (min-width: 960px) { 
     .col-cd { width: 50%; } 
-    .col-cl { width: 50%; margin-top: 0; } 
+    .col-cl { width: 50%; } 
 }
 .bg-cava {
-    color: #fff;
-    min-height: 256px;
+    min-height: 420px;
     background-image: url("imgs/bg-cava.jpg");
     background-size: cover;
     background-position: center;
@@ -321,9 +320,8 @@ border: 1px solid #eee;
     background-position: center;
 }
 .bg-cava-1 { background-image: url("imgs/bg-cava-1.png"); }
-.bg-cava-2 { background-image: url("imgs/bg-cava-2.png"); min-height: 82px !important;}
+.bg-cava-2 { background-image: url("imgs/bg-cava-2.png"); }
 .bg-cava-3 { background-image: url("imgs/bg-cava-3.png"); }
-.cava-2 { min-height: 82px !important;}
 /* end of cava */
 
 /* sz table wines */
@@ -366,7 +364,7 @@ border: 1px solid #eee;
 }
 .sgr-desc {
     color: white;
-    line-height: 1.6;
+    line-height: 1.75;
     width: 80%;
     max-width: 520px;
     margin: 10vh auto 20px auto;
@@ -381,7 +379,7 @@ border: 1px solid #eee;
 .esp-cider .item { min-width: 320px; max-width: 480px; min-height: 138px; }
 .esp-cider .item-txt { display: inline-block; width: calc(100% - 138px); }
 .esp-cider .item-img { display: inline-block; width: 128px; height: 128px; padding-left: 10px; vertical-align: top; }
-.esp-cider .item-info { max-width: 360px; }
+.esp-cider .item-detail { max-width: 360px; }
 .esp-cider .item-img img { height: 128px; display: block; margin: auto; 
   filter: drop-shadow(0px -0px 4px rgba(15,15,15,0.5)); 
   -webkit-filter: drop-shadow(0px -0px 4px rgba(15,15,15,0.5)); 

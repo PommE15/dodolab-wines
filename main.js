@@ -19,21 +19,8 @@
                     alc : d.gsx$alc.$t,
                     org : d.gsx$origin.$t,
                     desc: d.gsx$desc.$t,
-                    info: d.gsx$details.$t,
-                    temp: d.gsx$temp.$t,
-                    year: d.gsx$year.$t
-                    /*
-                    id  : d.id,//d.gsx$id.$t,
-                    cave: d.cave,//d.gsx$cave.$t,
-                    name: d.name,//d.gsx$name.$t,
-                    size: d.size,//d.gsx$size.$t,
-                    alc : d.alc,//d.gsx$alc.$t,
-                    org : d.origin,//d.gsx$origin.$t,
-                    desc: d.desc,//d.gsx$desc.$t,
-                    info: d.details,//d.gsx$details.$t,
-                    temp: d.temp,//d.gsx$temp.$t,
-                    year: d.year//d.gsx$year.$t
-                    */
+                    detail: d.gsx$details.$t,
+                    prix: d.gsx$price.$t
                 };
                 return datum;
             });
@@ -44,8 +31,9 @@
         var cavaList = list.filter(function(d) { return d.id.indexOf("cava") !== -1; });
         var cavaDesc = document.querySelector(".js-cava-desc");
         cavaDesc.textContent = cavaList[0].desc;
-        d3.selectAll(".js-cl").data(cavaList)
-        .html(function(d) { return d.name + "<br>" + d.org + " / " + d.size; });
+        d3.selectAll(".js-cl")
+        .data(cavaList)
+        .html(function(d) { return item(d); });
         
         // sz table wines
         var szList = list.filter(function(d) { return d.id.indexOf("sz") !== -1; });
@@ -55,14 +43,17 @@
         .html(function(d) { return item(d); });
 
         // sangria 
+        var sangriaInfo = document.querySelector(".js-sgr-info");
         var sangriaDesc = document.querySelector(".js-sgr-desc");
-        sangriaDesc.textContent = list[0].desc + list[0].info;
+        var sgrData = filterData(list, "sgr")[0];
+        sangriaInfo.innerHTML = itemInfo(sgrData);
+        sangriaDesc.textContent = list[0].desc + list[0].detail;
               
         // cherry
-        var prtData = list.filter(function(d) { return d.id.indexOf("cherry") !== -1; }),
-            prtKeys = ["name", "desc", "info"];
-        addTexts(prtKeys, prtData[0]);
-        
+        var prtData = filterData(list, "cherry")[0],
+            prtKeys = ["name", "desc", "detail"];
+        addTexts(prtKeys, prtData);
+        document.querySelector(".js-prt-info").innerHTML = itemInfo(prtData);
         // mayador 
         var ciderData = filterData(list, "m-c"),
             bustoData = filterData(list, "m-b"),
@@ -93,12 +84,22 @@
         document.querySelector(".js-prt-" + k).textContent = data[k];      
       });
     }
+    
+    function itemInfo(d) {
+      var alc = d.alc!=="" ? d.alc + " 酒精<br>" : " / ";
+      return (
+        "<span class='fs-i'>" + 
+          d.org + " / " + alc +
+          "售價 " + d.prix + " / " + d.size + 
+        "</span>"
+      ); 
+    }
 
     function item(d) {
         return ( 
-            "<h4 class='item-name'>" + d.name + "</h4>" + 
-            "<span class='fs-i'>" + d.org + " / " + d.size + " / 酒精 " + d.alc +
-            "</span><p class='item-info'>" + d.info + "</p>"
+          "<h4 class='item-name'>" + d.name + "</h4>" + 
+          itemInfo(d) +
+          "<p class='item-detail'>" + d.detail + "</p>"
         );
     }
     function addItems(key, data) {
