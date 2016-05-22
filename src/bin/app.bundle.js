@@ -44,6 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var SwissWine = __webpack_require__(1);
 	var React = __webpack_require__(43);
 	var ReactDOM = __webpack_require__(68);
@@ -65,44 +67,66 @@
 
 	"use strict";
 
-	const React = __webpack_require__(2);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	const { Component } = React;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(2);
+
+	var Component = React.Component;
+
 
 	__webpack_require__(39);
 
-	class SwissWine extends Component {
-	  render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-3' },
-	      React.createElement(
-	        'div',
-	        { className: 'col-3-top' },
-	        React.createElement('img', { src: 'imgs/vs/vs-6.jpg' })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col-3-bottom' },
-	        React.createElement(
-	          'h4',
-	          { className: 'item-name' },
-	          '2013 Rouge de Venthône / 婚禮黑皮諾'
-	        ),
-	        React.createElement(
-	          'span',
-	          { className: 'fs-i' },
-	          '瑞士 Valais A.O.C / 750ml / 酒精 14.4%'
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'item-info' },
-	          '嚴選 100% Pinot Noir 足夠成熟的葡萄，經過至少一年法國橡木桶熟成。有豐富野草莓芳香，酒體濃厚。適合單飲或多樣多變的台菜。適飲 17℃ 。'
-	        )
-	      )
-	    );
+	var SwissWine = function (_Component) {
+	  _inherits(SwissWine, _Component);
+
+	  function SwissWine() {
+	    _classCallCheck(this, SwissWine);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SwissWine).apply(this, arguments));
 	  }
-	}
+
+	  _createClass(SwissWine, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'col-3' },
+	        React.createElement(
+	          'div',
+	          { className: 'col-3-top' },
+	          React.createElement('img', { src: 'imgs/vs/vs-6.jpg' })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col-3-bottom' },
+	          React.createElement(
+	            'h4',
+	            { className: 'item-name' },
+	            '2013 Rouge de Venthône / 婚禮黑皮諾'
+	          ),
+	          React.createElement(
+	            'span',
+	            { className: 'fs-i' },
+	            '瑞士 Valais A.O.C / 750ml / 酒精 14.4%'
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'item-info' },
+	            '嚴選 100% Pinot Noir 足夠成熟的葡萄，經過至少一年法國橡木桶熟成。有豐富野草莓芳香，酒體濃厚。適合單飲或多樣多變的台菜。適飲 17℃ 。'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SwissWine;
+	}(Component);
 
 	module.exports = SwissWine;
 
