@@ -391,36 +391,46 @@ border: 1px solid #eee;
     background-color: rgb(15, 10, 15);
 }
 
-@media (max-width: 480px)  { 
-    /*.esp-cider .item-txt { width: calc(100% - 64px); }*/
-    /*[class*="bg-m-"]{ background-position: 358px; }*/
-}
-
 .prt-cherry {
     overflow: auto;
     position: relative;
 }
 .prt-awards {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -5px;
+    left: calc(100% - 160px);
 }
 .bg-cherry {
     background: 
         url("imgs/cherry-item.jpg"), 
-        url("imgs/cherry-itqi.png"), 
         url("imgs/cherry-deco.png");
     background-repeat: no-repeat;
-    background-position: center 95%, 97% -3px, top left;
-    background-size: 300px auto, 48px auto, 30% auto;
-    padding-bottom: 220px;
+    background-position: center 92%, top left;
+    background-size: 320px auto, 50% auto;
+    padding-bottom: 250px;
 }
 @media (min-width: 740px) {
+    .prt-awards {
+        left: calc(50% + 180px);  
+    }
     .bg-cherry{ 
-        background-position: 95% 65%, 45% -3px, top left;
-        background-size: 300px auto, 58px auto, 30% auto;
+        background-position: calc(50% + 180px) 65%, top left;
+        background-size: 320px auto, 25% auto;
         padding-bottom: 2%;
-}}
+    }
+}
+@media (max-width: 460px)  { 
+    .col-cherry {
+      padding-top: 30px !important;
+    } 
+    .bg-cherry{ 
+        background-size: 280px auto, 80% auto;
+    }
+}
+.col-cherry {
+  padding-top: 100px !important;
+  padding-right: 15px !important;
+}
 
 .col-2 {
     width: 100%;
@@ -430,10 +440,10 @@ border: 1px solid #eee;
     overflow: hidden;
 }
 @media (min-width: 740px) { 
-    .w-cl  { width: calc(100% - 300px); } 
-    .col-2 { width: calc(100% / 2); } 
+    .col-2  { width: calc(100% / 2); } 
     .col-2-left { padding: 2% 3% 2% 6%; }
     .col-2-right { padding: 2% 6% 2% 3%; }
+    /*.col-cl { width: calc(100% - 300px); }*/ 
 }
 
 

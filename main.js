@@ -86,7 +86,7 @@
     }
     
     function itemInfo(d) {
-      var alc = d.alc!=="" ? d.alc + " 酒精<br>" : " / ";
+      var alc = d.alc!=="" ? d.alc + " 酒精<br>" : "";
       return (
         "<span class='fs-i'>" + 
           d.org + " / " + alc +
