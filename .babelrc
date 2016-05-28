@@ -1,1 +1,1 @@
- { "presets": ["react"] }
+{ "presets": ["react", "babel-preset-es2015"] }

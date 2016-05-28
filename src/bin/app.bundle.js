@@ -8533,6 +8533,8 @@
 /* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
 	var SwissWine = __webpack_require__(301);
 	var SwissWineContainer = __webpack_require__(342);
 	var React = __webpack_require__(343);
@@ -8566,44 +8568,66 @@
 
 	"use strict";
 
-	const React = __webpack_require__(302);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	const { Component } = React;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(302);
+
+	var Component = React.Component;
+
 
 	__webpack_require__(338);
 
-	class SwissWine extends Component {
-	  render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'col-3' },
-	      React.createElement(
-	        'div',
-	        { className: 'col-3-top' },
-	        React.createElement('img', { src: this.props.image })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'col-3-bottom' },
-	        React.createElement(
-	          'h4',
-	          { className: 'item-name' },
-	          this.props.name
-	        ),
-	        React.createElement(
-	          'span',
-	          { className: 'fs-i' },
-	          this.props.details
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'item-info' },
-	          this.props.info
-	        )
-	      )
-	    );
+	var SwissWine = function (_Component) {
+	  _inherits(SwissWine, _Component);
+
+	  function SwissWine() {
+	    _classCallCheck(this, SwissWine);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SwissWine).apply(this, arguments));
 	  }
-	}
+
+	  _createClass(SwissWine, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'col-3' },
+	        React.createElement(
+	          'div',
+	          { className: 'col-3-top' },
+	          React.createElement('img', { src: this.props.image })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col-3-bottom' },
+	          React.createElement(
+	            'h4',
+	            { className: 'item-name' },
+	            this.props.name
+	          ),
+	          React.createElement(
+	            'span',
+	            { className: 'fs-i' },
+	            this.props.details
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'item-info' },
+	            this.props.info
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SwissWine;
+	}(Component);
 
 	module.exports = SwissWine;
 
@@ -13008,50 +13032,86 @@
 
 	"use strict";
 
-	const React = __webpack_require__(302);
-	const SwissWine = __webpack_require__(301);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	const { Component } = React;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	class SwissWineContainer extends Component {
-	  constructor(props) {
-	    super(props);
-	    this.state = {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(302);
+	var SwissWine = __webpack_require__(301);
+
+	var Component = React.Component;
+
+	var SwissWineContainer = function (_Component) {
+	  _inherits(SwissWineContainer, _Component);
+
+	  function SwissWineContainer(props) {
+	    _classCallCheck(this, SwissWineContainer);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SwissWineContainer).call(this, props));
+
+	    _this.state = {
 	      wineList: []
 	    };
+	    return _this;
 	  }
 
-	  componentWillMount() {
-	    const key = "1aCp4Ye2NoDgI2Qd_TwieXU9uvzU1tdZngsoRcg3Werg";
-	    const url = "https://spreadsheets.google.com/feeds/list/" + key + "/od6/public/values?alt=json";
-	    fetch(url).then(res => res.json()).then(json => json.feed.entry.map(d => ({
-	      id: d.gsx$id.$t,
-	      cave: d.gsx$cave.$t,
-	      name: d.gsx$name.$t,
-	      size: d.gsx$size.$t,
-	      alc: d.gsx$alc.$t,
-	      org: d.gsx$origin.$t,
-	      desc: d.gsx$desc.$t,
-	      info: d.gsx$details.$t,
-	      price: d.gsx$price.$t
-	    }))).then(data => data.filter(d => d.id.indexOf("vs-") !== -1)).then(data => this.setState({ wineList: data }));
-	  }
+	  _createClass(SwissWineContainer, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
 
-	  render() {
-	    const wines = this.state.wineList.map((wine, i) => React.createElement(SwissWine, {
-	      key: wine.id,
-	      image: 'imgs/vs/' + wine.id + '.jpg',
-	      name: wine.name,
-	      info: wine.info,
-	      details: [wine.org, wine.size, wine.alc].join(' / ')
-	    }));
-	    return React.createElement(
-	      'div',
-	      null,
-	      wines
-	    );
-	  }
-	}
+	      var key = "1aCp4Ye2NoDgI2Qd_TwieXU9uvzU1tdZngsoRcg3Werg";
+	      var url = "https://spreadsheets.google.com/feeds/list/" + key + "/od6/public/values?alt=json";
+	      fetch(url).then(function (res) {
+	        return res.json();
+	      }).then(function (json) {
+	        return json.feed.entry.map(function (d) {
+	          return {
+	            id: d.gsx$id.$t,
+	            cave: d.gsx$cave.$t,
+	            name: d.gsx$name.$t,
+	            size: d.gsx$size.$t,
+	            alc: d.gsx$alc.$t,
+	            org: d.gsx$origin.$t,
+	            desc: d.gsx$desc.$t,
+	            info: d.gsx$details.$t,
+	            price: d.gsx$price.$t
+	          };
+	        });
+	      }).then(function (data) {
+	        return data.filter(function (d) {
+	          return d.id.indexOf("vs-") !== -1;
+	        });
+	      }).then(function (data) {
+	        return _this2.setState({ wineList: data });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var wines = this.state.wineList.map(function (wine, i) {
+	        return React.createElement(SwissWine, {
+	          key: wine.id,
+	          image: 'imgs/vs/' + wine.id + '.jpg',
+	          name: wine.name,
+	          info: wine.info,
+	          details: [wine.org, wine.size, wine.alc].join(' / ')
+	        });
+	      });
+	      return React.createElement(
+	        'div',
+	        null,
+	        wines
+	      );
+	    }
+	  }]);
+
+	  return SwissWineContainer;
+	}(Component);
 
 	module.exports = SwissWineContainer;
 
