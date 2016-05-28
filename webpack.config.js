@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/js/app.js',
+    entry: ['whatwg-fetch', 'babel-polyfill', './src/js/app.js'],
     output: {
         path: './src/bin',
         filename: 'app.bundle.js',
