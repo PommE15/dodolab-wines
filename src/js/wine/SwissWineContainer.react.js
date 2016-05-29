@@ -27,9 +27,11 @@ class SwissWineContainer extends Component {
         details={[wine.org, wine.size, wine.alc].join(' / ')}
       />
     );
-    return <div>
-      {wines}
-    </div>;
+    return (
+      <div>
+        {wines}
+      </div>
+    );
   }
 }
 

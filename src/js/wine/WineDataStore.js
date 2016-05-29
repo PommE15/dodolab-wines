@@ -35,6 +35,26 @@ class WineDataStore {
       ));
   }
 
+  getCavaWineList() {
+    return this.getWineList()
+      .then(wineList => wineList.filter(
+        w => w.id.indexOf("cava") !== -1
+      ));
+  }
+
+  getSZWineList() {
+    return this.getWineList()
+      .then(wineList => wineList.filter(
+        w => w.id.indexOf("sz") !== -1
+      ));
+  }
+
+  getSherryWineList() {
+    return this.getWineList()
+      .then(wineList => wineList.filter(
+        w => w.id.indexOf("sherry") !== -1
+      ));
+  }
 }
 
 module.exports = WineDataStore;
