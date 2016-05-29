@@ -1,0 +1,25 @@
+.bg-sz {
+  background-size: auto 200px;
+  background-repeat: no-repeat;
+  background-position: top left
+}
+
+.item-detail {
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+/* sz table wines */
+.sz-list {
+    overflow: auto;
+    margin-top: 30px;
+}
+.sz-list div {
+    width: 300px;
+    min-height: 210px;
+    margin: auto;
+    padding: 5px 0 15px 85px;
+    box-sizing: border-box;
+}
+@media (min-width: 480px) { .sz-list div { width: 50%; float: left; }}
+@media (min-width: 740px) { .sz-list div { width: 33%; float: left; } }
