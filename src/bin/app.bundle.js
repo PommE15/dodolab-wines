@@ -13042,6 +13042,7 @@
 
 	var React = __webpack_require__(302);
 	var SwissWine = __webpack_require__(301);
+	var WineDataStore = __webpack_require__(498);
 
 	var Component = React.Component;
 
@@ -13056,41 +13057,14 @@
 	    _this.state = {
 	      wineList: []
 	    };
+	    var wineDataStore = new WineDataStore();
+	    wineDataStore.getSwissWineList().then(function (wineList) {
+	      return _this.setState({ wineList: wineList });
+	    });
 	    return _this;
 	  }
 
 	  _createClass(SwissWineContainer, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      var key = "1aCp4Ye2NoDgI2Qd_TwieXU9uvzU1tdZngsoRcg3Werg";
-	      var url = "https://spreadsheets.google.com/feeds/list/" + key + "/od6/public/values?alt=json";
-	      fetch(url).then(function (res) {
-	        return res.json();
-	      }).then(function (json) {
-	        return json.feed.entry.map(function (d) {
-	          return {
-	            id: d.gsx$id.$t,
-	            cave: d.gsx$cave.$t,
-	            name: d.gsx$name.$t,
-	            size: d.gsx$size.$t,
-	            alc: d.gsx$alc.$t,
-	            org: d.gsx$origin.$t,
-	            desc: d.gsx$desc.$t,
-	            info: d.gsx$details.$t,
-	            price: d.gsx$price.$t
-	          };
-	        });
-	      }).then(function (data) {
-	        return data.filter(function (d) {
-	          return d.id.indexOf("vs-") !== -1;
-	        });
-	      }).then(function (data) {
-	        return _this2.setState({ wineList: data });
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var wines = this.state.wineList.map(function (wine, i) {
@@ -32762,6 +32736,69 @@
 	var ReactMount = __webpack_require__(490);
 
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 498 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var WineDataStore = function () {
+	  function WineDataStore() {
+	    _classCallCheck(this, WineDataStore);
+
+	    this.wineList = null;
+	  }
+
+	  _createClass(WineDataStore, [{
+	    key: "getWineList",
+	    value: function getWineList() {
+	      var _this = this;
+
+	      var key = "1aCp4Ye2NoDgI2Qd_TwieXU9uvzU1tdZngsoRcg3Werg";
+	      var url = "https://spreadsheets.google.com/feeds/list/" + key + "/od6/public/values?alt=json";
+	      if (this.wineList) {
+	        return this.wineList;
+	      }
+	      return fetch(url).then(function (res) {
+	        return res.json();
+	      }).then(function (json) {
+	        return json.feed.entry.map(function (d) {
+	          return {
+	            id: d.gsx$id.$t,
+	            cave: d.gsx$cave.$t,
+	            name: d.gsx$name.$t,
+	            size: d.gsx$size.$t,
+	            alc: d.gsx$alc.$t,
+	            org: d.gsx$origin.$t,
+	            desc: d.gsx$desc.$t,
+	            info: d.gsx$details.$t,
+	            price: d.gsx$price.$t
+	          };
+	        });
+	      }).then(function (wineList) {
+	        return _this._wineList = wineList;
+	      });
+	    }
+	  }, {
+	    key: "getSwissWineList",
+	    value: function getSwissWineList() {
+	      return this.getWineList().then(function (wineList) {
+	        return wineList.filter(function (w) {
+	          return w.id.indexOf("vs-") !== -1;
+	        });
+	      });
+	    }
+	  }]);
+
+	  return WineDataStore;
+	}();
+
+	module.exports = WineDataStore;
 
 /***/ }
 /******/ ]);
